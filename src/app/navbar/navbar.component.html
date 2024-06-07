@@ -1,13 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="navbar-brand">
-      <img src="assets/img/hm_logo.jpg" alt="hm logo" width="50%" height="50%"/>
+      <img src="assets/img/hm_logo.png" alt="Hochschule München" width="190px" height="40px" style="margin-left: 10px; margin-right: 20px;"/>
+      <!-- <img src="assets/img/hm_logo.png" alt="Hochschule München" width="20%" height="20%"/> -->
     </div>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item"><a class="nav-link" routerLink="/">Home</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="/hashfunction" routerLinkActive="active" ariaCurrentWhenActive="page">Hash Funktion</a></li>
-    </ul>
-    <div>
-      <!-- Add login/logout buttons or user-related actions here -->
+    <div class="">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" routerLink="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/hashfunction" routerLinkActive="active" ariaCurrentWhenActive="page">Hash Funktion</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/signatures" routerLinkActive="active" ariaCurrentWhenActive="page">Signaturen</a></li>
+        </ul>
     </div>
 </nav>
 <router-outlet></router-outlet>
