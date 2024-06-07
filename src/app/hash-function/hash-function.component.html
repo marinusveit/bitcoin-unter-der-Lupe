@@ -1,17 +1,19 @@
-<div class="container mt-4">
+  <div class="container mt-4">
     <div class="row">
-      <div class="">
+      <div class="col-md-6 offset-md-3">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">SHA-256 Hash</h5>
-            <input type="text" class="form-control mb-3" (input)="onInput($event)" placeholder="Was wollen Sie gehasht haben?">
+            <h5 class="card-title">SHA-256 Hash Funktion</h5>
+            <input type="text" class="form-control mb-3" (input)="onInput($event)" placeholder="Geben Sie Text ein">
             <p class="card-text">SHA-256 Hash (hexadezimal):</p>
             <div class="alert alert-secondary" role="alert">
                 {{ hashHex }}
             </div>
             <p class="card-text">SHA-256 Hash (binär):</p>
             <div class="alert alert-secondary" role="alert">
-              {{ hash }}
+              <span *ngFor="let bit of hash; let i = index" [ngClass]="{'text-danger': bit !== previousHash[i]}">
+                {{ bit }}
+              </span>
             </div>
           </div>
         </div>
