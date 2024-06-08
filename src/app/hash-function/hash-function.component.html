@@ -1,22 +1,103 @@
-  <div class="container mt-4">
+<!-- <div>
+    <p class="text-justify"><b><em>Hashfunktion H</em></b> bildet unendliche Menge von <b><em>Daten</em></b> oder <b><em>Nachrichten D</em></b> auf eine begrenzte Zahl von Werten, den <b><em>Hashwert h := H(D)</em></b>, ab. Der Hashwert wird auch kurz Hash genannt und hat eine feste Länge von <b><em>m</em></b> Bits.</p>
+    <p class="text-justify">Hashfunktionen sind Einwegfunktionen. TODO kurze erkläörung was eine Einweg Funktion ist</p>
+    <p class="text-justify">Anforderungen an kryptografische Hashfunktionen</p>
+</div> -->
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Kryptografische Hashfunktionen</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5>Was sind Hashfunktionen?</h5>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li ><b><em>Hashfunktion H</em></b> bildet unendliche Menge von <b><em>Daten</em></b> oder <b><em>Nachrichten D</em></b> auf eine begrenzte Zahl von Werten, den <b><em>Hashwert h := H(D)</em></b>, ab. Der Hashwert wird auch kurz Hash genannt und hat eine feste Länge von <b><em>m</em></b> Bits.</li>
+            <li>Kryptografische Hashfunktionen sind Einwegfunktion</li>
+            <li> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5>Anwendungsgebiete</h5>
+        </div>
+        <div class="card-body">
+          <ul >
+            <li> Datenintegrität prüfen</li>
+            <li> PRNG (pseudo Random Number Generator)</li>
+            <li> Passwortspeicherung</li>
+            <li> Digitale Signaturen und Zertifikate</li>
+            <li> Schlüsselableitung</li>
+            <li> ...</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5>Eigenschaften und Anforderungen</h5>
+        </div>
+        <div class="card-body">
+            <ul>
+              <li> Effizient berechenbar</li>
+              <li> Deterministisch: gleiche Eingabe liefert immer den gleichen Hash</li>
+              <li> Beliebige Eingangslängen erlaubt, Ausgangslänge fest (Je nach Hashfunktion zwischen 20 und 64 byte) </li>
+              <li> geringe Wahrscheinlichkeit von Kollisionen</li>
+              <li> "Avalanche Effect" (Leicht veränderte Eingabe &rArr; Haswert ändert sich zu ca. 50 %)</li>
+              <li> Kollisionsresistenz</li>
+              <li> Vorbilderresistenz</li>
+              <li> Zweite-Vorbild-Resistenz</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5>Bekannte Hashfunktionen</h5>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li> MD5</li>
+            <li> SHA-1</li>
+            <li> <b>SHA-256</b> (diese Hashfunktion wird im Anschluss immer verwendet, auch die Hashfunktion die in Bitcoin im Einsatz ist) </li>
+            <li> SHA-3</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+    <h3 class="text-center mb-4">Avalanche Effect und Hashfunktion zum Spielen</h3>
     <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">SHA-256 Hash Funktion</h5>
-            <input type="text" class="form-control mb-3" (input)="onInput($event)" placeholder="Geben Sie Text ein">
-            <p class="card-text">SHA-256 Hash (hexadezimal):</p>
-            <div class="alert alert-secondary" role="alert">
-                {{ hashHex }}
-            </div>
-            <p class="card-text">SHA-256 Hash (binär):</p>
-            <div class="alert alert-secondary" role="alert">
-              <span *ngFor="let bit of hash; let i = index" [ngClass]="{'text-danger': bit !== previousHash[i]}">
-                {{ bit }}
-              </span>
-            </div>
+        <div class="col-md-6 offset-md-3">
+        <p>Die Bits die sich zum letzten Hash verändert haben sind blau dargestellt</p>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">SHA-256 Hash Funktion</h5>
+          <input type="text" class="form-control mb-3" (input)="onInput($event)" placeholder="Was wollen Sie gehasht haben?">
+          <p class="card-text">SHA-256 Hash (hexadezimal):</p>
+          <div class="alert alert-secondary" role="alert">
+              {{ hashHex }}
+          </div>
+          <p class="card-text">SHA-256 Hash (binär):</p>
+          <div class="alert alert-secondary" role="alert">
+            <span *ngFor="let bit of hash; let i = index" [ngClass]="{'text-primary': bit !== previousHash[i]}">
+              {{ bit }}
+            </span>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div style="margin-bottom: 80px;"></div>
