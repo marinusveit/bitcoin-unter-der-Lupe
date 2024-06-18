@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+a:link {
+    text-decoration: none;
+}
+
+.hover-tooltip {
+    border-bottom: 1px dotted #000;
+    border-color: red;
+    cursor: help; /* Changes the cursor to a question mark*/
+}

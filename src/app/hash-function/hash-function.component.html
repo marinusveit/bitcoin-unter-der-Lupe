@@ -1,11 +1,6 @@
-<!-- <div>
-    <p class="text-justify"><b><em>Hashfunktion H</em></b> bildet unendliche Menge von <b><em>Daten</em></b> oder <b><em>Nachrichten D</em></b> auf eine begrenzte Zahl von Werten, den <b><em>Hashwert h := H(D)</em></b>, ab. Der Hashwert wird auch kurz Hash genannt und hat eine feste Länge von <b><em>m</em></b> Bits.</p>
-    <p class="text-justify">Hashfunktionen sind Einwegfunktionen. TODO kurze erkläörung was eine Einweg Funktion ist</p>
-    <p class="text-justify">Anforderungen an kryptografische Hashfunktionen</p>
-</div> -->
-
 <div class="container mt-5">
   <h2 class="text-center mb-4">Kryptografische Hashfunktionen</h2>
+  <h3 class="text-center mb-4">Allgemeines zu Hashfunktionen</h3>
   <div class="row">
     <div class="col-md-6">
       <div class="card mb-4">
@@ -15,7 +10,7 @@
         <div class="card-body">
           <ul>
             <li ><b><em>Hashfunktion H</em></b> bildet unendliche Menge von <b><em>Daten</em></b> oder <b><em>Nachrichten D</em></b> auf eine begrenzte Zahl von Werten, den <b><em>Hashwert h := H(D)</em></b>, ab. Der Hashwert wird auch kurz Hash genannt und hat eine feste Länge von <b><em>m</em></b> Bits.</li>
-            <li>Kryptografische Hashfunktionen sind Einwegfunktion</li>
+            <li>Kryptografische Hashfunktionen sind Einwegfunktionen</li>
             <li> </li>
           </ul>
         </div>
@@ -100,5 +95,62 @@
     </div>
   </div>
 </div>
+
+<div class="container mt-5">
+  <h3  class="text-center mb-4" data-bs-toggle="collapse" href="#sizeExplanation" role="button" aria-expanded="false" aria-controls="sizeExplanation">
+      Veranschaulichung der Größe von 2<sup>256</sup> <i class="bi bi-chevron-down"></i>
+  </h3>
+  <div class="collapse" id="sizeExplanation">
+      <p>
+          2<sup>256</sup> = 115792089237316195423570985008687907853269984665640564039457584007913129639936 ≈ <strong>1.158 × 10<sup>77</sup></strong>
+      </p>
+      <p>
+          Zum Vergleich:
+      </p>
+      <ul>
+          <li>Die geschätzte <a href="https://www.universetoday.com/36302/atoms-in-the-universe/" target="_blank">Anzahl an Atomen im sichtbaren Universum beträgt etwa 10<sup>80</sup></a>.</li>
+          <li>2<sup>256</sup> ist also fast so groß wie die Anzahl der Atome im sichtbaren Universum.</li>
+      </ul>
+      <h4>
+        Zeit, die ein rechenstarker Computer benötigt
+      </h4>
+    <div>
+        <p>
+            Einer der aktuell schnellsten Supercomputer ist der <a href="https://www.olcf.ornl.gov/frontier/" target="_blank">Frontier Supercomputer</a>. Frontier hat eine Spitzenleistung von etwa 1.6 <span class="hover-tooltip" html="true" title="EF = ExaFLOPS = 1.6 × 10¹⁸ FLOPS (Floating Point Operations Per Second), also 1.6 Trillionen Fließkomma-Operationen pro Sekunde.">EF</span>.
+        </p>
+        <h5>Berechnung der Zeit für Hashwert-Bestimmung</h5>
+        <p>
+            Angenommen, ein sehr effizienter Algorithmus benötigt nur eine Operation, um einen Hashwert zu bestimmen (was in der Praxis jedoch viel mehr wäre):
+          </p>
+        <ul>
+            <li>Anzahl der möglichen Hashwerte: 2<sup>256</sup> = 1.158 × 10<sup>77</sup></li>
+            <li>Operationen pro Sekunde des Supercomputers: 1.6 × 10<sup>18</sup> FLOPS</li>
+        </ul>
+        <p>
+            Die benötigte Zeit (T) in Sekunden ist dann:
+            <strong>T = 1.158 × 10<sup>77</sup> / 1.6 × 10<sup>18</sup> ≈ 7.24 × 10<sup>58</sup> Sekunden</strong>
+        </p>
+        <p>
+          Das ist eine unfassbar lange Zeitspanne. Um das weiter zu verdeutlichen:
+        </p>
+        <ul>
+          <li>Ein Jahr hat etwa 31.5 Millionen Sekunden (3.15 × 10<sup>7</sup> Sekunden).</li>
+            <li>Die benötigte Zeit in Jahren wäre dann:
+                <strong>T ≈ 7.24 × 10<sup>58</sup> / 3.15 × 10<sup>7</sup> ≈ 2.30 × 10<sup>51</sup> Jahre</strong>
+              </li>
+            </ul>
+            <p>
+              Das ist viel länger als das geschätzte <a href="https://www.swr.de/wissen/1000-antworten/wie-wird-das-alter-des-universums-berechnet-100.html" target="_blank">Alter des Universums, welches etwa 13.7 Milliarden Jahre (1.37 × 10<sup>10</sup> Jahre)</a> beträgt.
+            </p>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 100px;"></div>
+
+TODO: Sachen die noch Interessant sein könnten:
+man weiß wie hashfunktion aufgebaut sind, reverse engineering tdem nicht möglich, jedoch nicht bewiesen. Aber es wird für die meisten verschlüsselungen im Internet verwendet.
+Hashfunktionen keinen Mathematischen hinergrund. Shift von Bits etc. -> Sicher von Quantencomputer?
+
 
 <div style="margin-bottom: 80px;"></div>
