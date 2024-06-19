@@ -1,315 +1,195 @@
 <div class="container mt-4">
   <h2 class="text-center mb-4">Kryptografische Hashfunktionen</h2>
   <div class="container mt-4">
-  <h3 class="mb-4" data-bs-toggle="collapse" href="#generalHashFunctions" role="button" aria-expanded="false" aria-controls="generalHashFunctions">
-    Allgemeines zu Hashfunktionen <i class="bi bi-chevron-down"></i>
-  </h3>
-  <div class="collapse" id="generalHashFunctions">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card mb-4">
-          <div class="card-header">
-            <h5>Was sind Hashfunktionen?</h5>
-          </div>
-          <div class="card-body">
-            <ul>
-              <li><b><em>Hashfunktion H</em></b> bildet unendliche Menge von <b><em>Daten</em></b> oder <b><em>Nachrichten D</em></b> auf eine begrenzte Zahl von Werten, den <b><em>Hashwert h := H(D)</em></b>, ab. Der Hashwert wird auch kurz Hash genannt und hat eine feste Länge von <b><em>m</em></b> Bits.</li>
-              <li>Kryptografische Hashfunktionen sind Einwegfunktionen</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card mb-4">
-          <div class="card-header">
-            <h5>Anwendungsgebiete</h5>
-          </div>
-          <div class="card-body">
-            <ul>
-              <li> Datenintegrität prüfen</li>
-              <li> PRNG (pseudo Random Number Generator)</li>
-              <li> Passwortspeicherung</li>
-              <li> Digitale Signaturen und Zertifikate</li>
-              <li> Schlüsselableitung</li>
-              <li> ...</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card mb-4">
-          <div class="card-header">
-            <h5>Eigenschaften und Anforderungen</h5>
-          </div>
-          <div class="card-body">
-            <ul>
-              <li> Effizient berechenbar</li>
-              <li> Deterministisch: gleiche Eingabe liefert immer den gleichen Hash</li>
-              <li> Beliebige Eingangslängen erlaubt, Ausgangslänge fest (Je nach Hashfunktion zwischen 20 und 64 byte) </li>
-              <li> geringe Wahrscheinlichkeit von Kollisionen</li>
-              <li> "Avalanche Effect" (Leicht veränderte Eingabe &rArr; Haswert ändert sich zu ca. 50 %)</li>
-              <li> Jeder Hashwert soll möglich sein (surjektiv)</li>
-              <li> Kollisionsresistenz</li>
-              <li> Vorbilderresistenz</li>
-              <li> Zweite-Vorbild-Resistenz</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card mb-4">
-          <div class="card-header">
-            <h5>Bekannte Hashfunktionen</h5>
-          </div>
-          <div class="card-body">
-            <ul>
-              <li> MD5</li>
-              <li> SHA-1</li>
-              <li> <b>SHA-256</b> (diese Hashfunktion wird im Anschluss immer verwendet, auch die Hashfunktion die in Bitcoin im Einsatz ist) </li>
-              <li> SHA-3</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-
-  <div class="container mt-4">
-    <h3 class="mb-4" data-bs-toggle="collapse" href="#avalancheEffect" role="button" aria-expanded="false" aria-controls="avalancheEffect">
-      Avalanche Effect und Hashfunktion zum Spielen <i class="bi bi-chevron-down"></i>
-    </h3>
-    <div class="collapse" id="avalancheEffect">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <p>Die Bits die sich zum letzten Hash verändert haben sind blau dargestellt</p>
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">SHA-256 Hash Funktion</h5>
-              <input type="text" class="form-control mb-3" (input)="onInput($event)" placeholder="Was wollen Sie gehasht haben?">
-              <p class="card-text">SHA-256 Hash (hexadezimal):</p>
-              <div class="alert alert-secondary" role="alert">
-                {{ hashHex }}
+     <h3 class="mb-4" data-bs-toggle="collapse" href="#generalHashFunctions" role="button" aria-expanded="false" aria-controls="generalHashFunctions">
+        Allgemeines zu Hashfunktionen <i class="bi bi-chevron-down"></i>
+     </h3>
+     <div class="collapse" id="generalHashFunctions">
+        <div class="row">
+           <div class="col-md-6">
+              <div class="card mb-4">
+                 <div class="card-header">
+                    <h5>Was sind Hashfunktionen?</h5>
+                 </div>
+                 <div class="card-body">
+                    <ul>
+                       <li><b><em>Hashfunktion H</em></b> bildet unendliche Menge von <b><em>Daten</em></b> oder <b><em>Nachrichten D</em></b> auf eine begrenzte Zahl von Werten, den <b><em>Hashwert h := H(D)</em></b>, ab. Der Hashwert wird auch kurz Hash genannt und hat eine feste Länge von <b><em>m</em></b> Bits.</li>
+                       <li>Kryptografische Hashfunktionen sind Einwegfunktionen</li>
+                    </ul>
+                 </div>
               </div>
-              <p class="card-text">SHA-256 Hash (binär):</p>
-              <div class="alert alert-secondary" role="alert">
-                <span *ngFor="let bit of hash; let i = index" [ngClass]="{'text-primary': bit !== previousHash[i]}">
-                  {{ bit }}
-                </span>
+           </div>
+           <div class="col-md-6">
+              <div class="card mb-4">
+                 <div class="card-header">
+                    <h5>Anwendungsgebiete</h5>
+                 </div>
+                 <div class="card-body">
+                    <ul>
+                       <li> Datenintegrität prüfen</li>
+                       <li> PRNG (pseudo Random Number Generator)</li>
+                       <li> Passwortspeicherung</li>
+                       <li> Digitale Signaturen und Zertifikate</li>
+                       <li> Schlüsselableitung</li>
+                       <li> ...</li>
+                    </ul>
+                 </div>
               </div>
-            </div>
-          </div>
+           </div>
+           <div class="col-md-6">
+              <div class="card mb-4">
+                 <div class="card-header">
+                    <h5>Eigenschaften und Anforderungen</h5>
+                 </div>
+                 <div class="card-body">
+                    <ul>
+                       <li> Effizient berechenbar</li>
+                       <li> Deterministisch: gleiche Eingabe liefert immer den gleichen Hash</li>
+                       <li> Beliebige Eingangslängen erlaubt, Ausgangslänge fest (Je nach Hashfunktion zwischen 20 und 64 byte) </li>
+                       <li> geringe Wahrscheinlichkeit von Kollisionen</li>
+                       <li> "Avalanche Effect" (Leicht veränderte Eingabe &rArr; Haswert ändert sich zu ca. 50 %)</li>
+                       <li> Jeder Hashwert soll möglich sein (surjektiv)</li>
+                       <li> Kollisionsresistenz</li>
+                       <li> Vorbilderresistenz</li>
+                       <li> Zweite-Vorbild-Resistenz</li>
+                    </ul>
+                 </div>
+              </div>
+           </div>
+           <div class="col-md-6">
+              <div class="card mb-4">
+                 <div class="card-header">
+                    <h5>Bekannte Hashfunktionen</h5>
+                 </div>
+                 <div class="card-body">
+                    <ul>
+                       <li> MD5</li>
+                       <li> SHA-1</li>
+                       <li> <b>SHA-256</b> (diese Hashfunktion wird im Anschluss immer verwendet, auch die Hashfunktion die in Bitcoin im Einsatz ist) </li>
+                       <li> SHA-3</li>
+                    </ul>
+                 </div>
+              </div>
+           </div>
         </div>
-      </div>
-    </div>
+     </div>
   </div>
-
   <div class="container mt-4">
-    <h3 class="mb-4" data-bs-toggle="collapse" href="#sizeExplanation" role="button" aria-expanded="false" aria-controls="sizeExplanation">
-      Veranschaulichung der Größe von 2<sup>256</sup> <i class="bi bi-chevron-down"></i>
-    </h3>
-    <div class="collapse" id="sizeExplanation">
-      <p>
-        2<sup>256</sup> = 115792089237316195423570985008687907853269984665640564039457584007913129639936 ≈ <strong>1.158 × 10<sup>77</sup></strong>
-      </p>
-      <p>
-        Zum Vergleich:
-      </p>
-      <ul>
-        <li>Die geschätzte <a href="https://www.universetoday.com/36302/atoms-in-the-universe/" target="_blank">Anzahl an Atomen im sichtbaren Universum beträgt etwa 10<sup>80</sup></a>.</li>
-        <li>2<sup>256</sup> ist also fast so groß wie die Anzahl der Atome im sichtbaren Universum.</li>
-      </ul>
-      <h4>
-        Zeit, die ein rechenstarker Computer benötigt
-      </h4>
-      <div>
+     <h3 class="mb-4" data-bs-toggle="collapse" href="#avalancheEffect" role="button" aria-expanded="false" aria-controls="avalancheEffect">
+        Avalanche Effect und Hashfunktion zum Spielen <i class="bi bi-chevron-down"></i>
+     </h3>
+     <div class="collapse" id="avalancheEffect">
+        <div class="row">
+           <div class="col-md-6 offset-md-3">
+              <p>Die Bits die sich zum letzten Hash verändert haben sind blau dargestellt</p>
+              <div class="card">
+                 <div class="card-body">
+                    <h5 class="card-title">SHA-256 Hash Funktion</h5>
+                    <input type="text" class="form-control mb-3" (input)="onInput($event)" placeholder="Was wollen Sie gehasht haben?">
+                    <p class="card-text">SHA-256 Hash (hexadezimal):</p>
+                    <div class="alert alert-secondary" role="alert">
+                       {{ hashHex }}
+                    </div>
+                    <p class="card-text">SHA-256 Hash (binär):</p>
+                    <div class="alert alert-secondary" role="alert">
+                       <span *ngFor="let bit of hash; let i = index" [ngClass]="{'text-primary': bit !== previousHash[i]}">
+                       {{ bit }}
+                       </span>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+  <div class="container mt-4">
+     <h3 class="mb-4" data-bs-toggle="collapse" href="#sizeExplanation" role="button" aria-expanded="false" aria-controls="sizeExplanation">
+        Veranschaulichung der Größe von 2<sup>256</sup> <i class="bi bi-chevron-down"></i>
+     </h3>
+     <div class="collapse" id="sizeExplanation">
         <p>
-          Einer der aktuell schnellsten Supercomputer ist der <a href="https://www.olcf.ornl.gov/frontier/" target="_blank">Frontier Supercomputer</a>. Frontier hat eine Spitzenleistung von etwa 1.6 <span class="hover-tooltip" html="true" title="EF = ExaFLOPS = 1.6 × 10¹⁸ FLOPS (Floating Point Operations Per Second), also 1.6 Trillionen Fließkomma-Operationen pro Sekunde.">EF</span>.
+           2<sup>256</sup> = 115792089237316195423570985008687907853269984665640564039457584007913129639936 ≈ <strong>1.158 × 10<sup>77</sup></strong>
         </p>
-        <h5>Berechnung der Zeit für Hashwert-Bestimmung</h5>
         <p>
-          Angenommen, ein sehr effizienter Algorithmus benötigt nur eine Operation, um einen Hashwert zu bestimmen (was in der Praxis jedoch viel mehr wäre):
+           Zum Vergleich:
         </p>
         <ul>
-          <li>Anzahl der möglichen Hashwerte: 2<sup>256</sup> = 1.158 × 10<sup>77</sup></li>
-          <li>Operationen pro Sekunde des Supercomputers: 1.6 × 10<sup>18</sup> FLOPS</li>
+           <li>Die geschätzte <a href="https://www.universetoday.com/36302/atoms-in-the-universe/" target="_blank">Anzahl an Atomen im sichtbaren Universum beträgt etwa 10<sup>80</sup></a>.</li>
+           <li>2<sup>256</sup> ist also fast so groß wie die Anzahl der Atome im sichtbaren Universum.</li>
         </ul>
-        <p>
-          Die benötigte Zeit (T) in Sekunden ist dann:
-          <strong>T = 1.158 × 10<sup>77</sup> / 1.6 × 10<sup>18</sup> ≈ 7.24 × 10<sup>58</sup> Sekunden</strong>
-        </p>
-        <p>
-          Das ist eine unfassbar lange Zeitspanne. Um das weiter zu verdeutlichen:
-        </p>
-        <ul>
-          <li>Ein Jahr hat etwa 31.5 Millionen Sekunden (3.15 × 10<sup>7</sup> Sekunden).</li>
-          <li>Die benötigte Zeit in Jahren wäre dann:
-            <strong>T ≈ 7.24 × 10<sup>58</sup> / 3.15 × 10<sup>7</sup> ≈ 2.30 × 10<sup>51</sup> Jahre</strong>
-          </li>
-        </ul>
-        <p>
-          Das ist viel länger als das geschätzte <a href="https://www.swr.de/wissen/1000-antworten/wie-wird-das-alter-des-universums-berechnet-100.html" target="_blank">Alter des Universums, welches etwa 13.7 Milliarden Jahre (1.37 × 10<sup>10</sup> Jahre)</a> beträgt.
-        </p>
-      </div>
-    </div>
+        <h4>
+           Zeit, die ein rechenstarker Computer benötigt
+        </h4>
+        <div>
+           <p>
+              Einer der aktuell schnellsten Supercomputer ist der <a href="https://www.olcf.ornl.gov/frontier/" target="_blank">Frontier Supercomputer</a>. Frontier hat eine Spitzenleistung von etwa 1.6 <span class="hover-tooltip" html="true" title="EF = ExaFLOPS = 1.6 × 10¹⁸ FLOPS (Floating Point Operations Per Second), also 1.6 Trillionen Fließkomma-Operationen pro Sekunde.">EF</span>.
+           </p>
+           <h5>Berechnung der Zeit für Hashwert-Bestimmung</h5>
+           <p>
+              Angenommen, ein sehr effizienter Algorithmus benötigt nur eine Operation, um einen Hashwert zu bestimmen (was in der Praxis jedoch viel mehr wäre):
+           </p>
+           <ul>
+              <li>Anzahl der möglichen Hashwerte: 2<sup>256</sup> = 1.158 × 10<sup>77</sup></li>
+              <li>Operationen pro Sekunde des Supercomputers: 1.6 × 10<sup>18</sup> FLOPS</li>
+           </ul>
+           <p>
+              Die benötigte Zeit (T) in Sekunden ist dann:
+              <strong>T = 1.158 × 10<sup>77</sup> / 1.6 × 10<sup>18</sup> ≈ 7.24 × 10<sup>58</sup> Sekunden</strong>
+           </p>
+           <p>
+              Das ist eine unfassbar lange Zeitspanne. Um das weiter zu verdeutlichen:
+           </p>
+           <ul>
+              <li>Ein Jahr hat etwa 31.5 Millionen Sekunden (3.15 × 10<sup>7</sup> Sekunden).</li>
+              <li>Die benötigte Zeit in Jahren wäre dann:
+                 <strong>T ≈ 7.24 × 10<sup>58</sup> / 3.15 × 10<sup>7</sup> ≈ 2.30 × 10<sup>51</sup> Jahre</strong>
+              </li>
+           </ul>
+           <p>
+              Das ist viel länger als das geschätzte <a href="https://www.swr.de/wissen/1000-antworten/wie-wird-das-alter-des-universums-berechnet-100.html" target="_blank">Alter des Universums, welches etwa 13.7 Milliarden Jahre (1.37 × 10<sup>10</sup> Jahre)</a> beträgt.
+           </p>
+        </div>
+     </div>
   </div>
-
+  <div class="container mt-4">
+     <h3 class="mb-4" data-bs-toggle="collapse" href="#preimageResistance" role="button" aria-expanded="false" aria-controls="preimageResistance">
+        Urbildresistenz <i class="bi bi-chevron-down"></i>
+     </h3>
+     <div class="collapse" id="preimageResistance">
+        <p>
+           Urbildresistenz bedeutet, dass es praktisch unmöglich sein sollte, ausgehend von einem gegebenen Hashwert das ursprüngliche Eingabedatum zu rekonstruieren.
+           Die einzige Möglichkeit ist zu raten und damit ist man lange beschäftigt, siehe <a [routerLink]="'#sizeExplanation'">Größe von 2^256</a>
+           .
+        </p>
+        <img src="assets/img/urbildresistenz.jpeg" class="img-fluid mx-auto d-block mt-3 mb-3" alt="Urbildresistenz">
+        <div class="row">
+           <div class="col-md-6 offset-md-3">
+              <div class="card">
+                 <div class="card-body">
+                    <input type="text" class="form-control mb-3" id="inputText" [(ngModel)]="inputText" (input)="calculateHash()" placeholder="Urbild eingeben">
+                    <h5 class="card-title">Hashwert (SHA-256) des Urbilds (binär)</h5>
+                    <div class="alert alert-secondary" role="alert">
+                       <span *ngFor="let bit of hashBinary; let i = index" [ngClass]="{'text-danger': bit !== targetHashBinary[i]}">{{ bit }}</span>
+                    </div>
+                    <h5 class="card-title">Ziel-Hashwert (binär)</h5>
+                    <div class="alert alert-secondary" role="alert">
+                       {{ targetHashBinary }}
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
   <div style="margin-top: 100px;"></div>
 </div>
-
-<!-- <div class="container mt-5">
-  <h2 class="text-center mb-4">Kryptografische Hashfunktionen</h2>
-  <h3 class="text-center mb-4">Allgemeines zu Hashfunktionen</h3>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card mb-4">
-        <div class="card-header">
-          <h5>Was sind Hashfunktionen?</h5>
-        </div>
-        <div class="card-body">
-          <ul>
-            <li ><b><em>Hashfunktion H</em></b> bildet unendliche Menge von <b><em>Daten</em></b> oder <b><em>Nachrichten D</em></b> auf eine begrenzte Zahl von Werten, den <b><em>Hashwert h := H(D)</em></b>, ab. Der Hashwert wird auch kurz Hash genannt und hat eine feste Länge von <b><em>m</em></b> Bits.</li>
-            <li>Kryptografische Hashfunktionen sind Einwegfunktionen</li>
-            <li> </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card mb-4">
-        <div class="card-header">
-          <h5>Anwendungsgebiete</h5>
-        </div>
-        <div class="card-body">
-          <ul >
-            <li> Datenintegrität prüfen</li>
-            <li> PRNG (pseudo Random Number Generator)</li>
-            <li> Passwortspeicherung</li>
-            <li> Digitale Signaturen und Zertifikate</li>
-            <li> Schlüsselableitung</li>
-            <li> ...</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card mb-4">
-        <div class="card-header">
-          <h5>Eigenschaften und Anforderungen</h5>
-        </div>
-        <div class="card-body">
-            <ul>
-              <li> Effizient berechenbar</li>
-              <li> Deterministisch: gleiche Eingabe liefert immer den gleichen Hash</li>
-              <li> Beliebige Eingangslängen erlaubt, Ausgangslänge fest (Je nach Hashfunktion zwischen 20 und 64 byte) </li>
-              <li> geringe Wahrscheinlichkeit von Kollisionen</li>
-              <li> "Avalanche Effect" (Leicht veränderte Eingabe &rArr; Haswert ändert sich zu ca. 50 %)</li>
-              <li> Jeder Hashwert soll möglich sein (surjektiv)</li>
-              <li> Kollisionsresistenz</li>
-              <li> Vorbilderresistenz</li>
-              <li> Zweite-Vorbild-Resistenz</li>
-            </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card mb-4">
-        <div class="card-header">
-          <h5>Bekannte Hashfunktionen</h5>
-        </div>
-        <div class="card-body">
-          <ul>
-            <li> MD5</li>
-            <li> SHA-1</li>
-            <li> <b>SHA-256</b> (diese Hashfunktion wird im Anschluss immer verwendet, auch die Hashfunktion die in Bitcoin im Einsatz ist) </li>
-            <li> SHA-3</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container mt-4">
-    <h3 class="text-center mb-4">Avalanche Effect und Hashfunktion zum Spielen</h3>
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-        <p>Die Bits die sich zum letzten Hash verändert haben sind blau dargestellt</p>
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">SHA-256 Hash Funktion</h5>
-          <input type="text" class="form-control mb-3" (input)="onInput($event)" placeholder="Was wollen Sie gehasht haben?">
-          <p class="card-text">SHA-256 Hash (hexadezimal):</p>
-          <div class="alert alert-secondary" role="alert">
-              {{ hashHex }}
-          </div>
-          <p class="card-text">SHA-256 Hash (binär):</p>
-          <div class="alert alert-secondary" role="alert">
-            <span *ngFor="let bit of hash; let i = index" [ngClass]="{'text-primary': bit !== previousHash[i]}">
-              {{ bit }}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container mt-5">
-  <h3  class="text-center mb-4" data-bs-toggle="collapse" href="#sizeExplanation" role="button" aria-expanded="false" aria-controls="sizeExplanation">
-      Veranschaulichung der Größe von 2<sup>256</sup> <i class="bi bi-chevron-down"></i>
-  </h3>
-  <div class="collapse" id="sizeExplanation">
-      <p>
-          2<sup>256</sup> = 115792089237316195423570985008687907853269984665640564039457584007913129639936 ≈ <strong>1.158 × 10<sup>77</sup></strong>
-      </p>
-      <p>
-          Zum Vergleich:
-      </p>
-      <ul>
-          <li>Die geschätzte <a href="https://www.universetoday.com/36302/atoms-in-the-universe/" target="_blank">Anzahl an Atomen im sichtbaren Universum beträgt etwa 10<sup>80</sup></a>.</li>
-          <li>2<sup>256</sup> ist also fast so groß wie die Anzahl der Atome im sichtbaren Universum.</li>
-      </ul>
-      <h4>
-        Zeit, die ein rechenstarker Computer benötigt
-      </h4>
-    <div>
-        <p>
-            Einer der aktuell schnellsten Supercomputer ist der <a href="https://www.olcf.ornl.gov/frontier/" target="_blank">Frontier Supercomputer</a>. Frontier hat eine Spitzenleistung von etwa 1.6 <span class="hover-tooltip" html="true" title="EF = ExaFLOPS = 1.6 × 10¹⁸ FLOPS (Floating Point Operations Per Second), also 1.6 Trillionen Fließkomma-Operationen pro Sekunde.">EF</span>.
-        </p>
-        <h5>Berechnung der Zeit für Hashwert-Bestimmung</h5>
-        <p>
-            Angenommen, ein sehr effizienter Algorithmus benötigt nur eine Operation, um einen Hashwert zu bestimmen (was in der Praxis jedoch viel mehr wäre):
-          </p>
-        <ul>
-            <li>Anzahl der möglichen Hashwerte: 2<sup>256</sup> = 1.158 × 10<sup>77</sup></li>
-            <li>Operationen pro Sekunde des Supercomputers: 1.6 × 10<sup>18</sup> FLOPS</li>
-        </ul>
-        <p>
-            Die benötigte Zeit (T) in Sekunden ist dann:
-            <strong>T = 1.158 × 10<sup>77</sup> / 1.6 × 10<sup>18</sup> ≈ 7.24 × 10<sup>58</sup> Sekunden</strong>
-        </p>
-        <p>
-          Das ist eine unfassbar lange Zeitspanne. Um das weiter zu verdeutlichen:
-        </p>
-        <ul>
-          <li>Ein Jahr hat etwa 31.5 Millionen Sekunden (3.15 × 10<sup>7</sup> Sekunden).</li>
-            <li>Die benötigte Zeit in Jahren wäre dann:
-                <strong>T ≈ 7.24 × 10<sup>58</sup> / 3.15 × 10<sup>7</sup> ≈ 2.30 × 10<sup>51</sup> Jahre</strong>
-              </li>
-            </ul>
-            <p>
-              Das ist viel länger als das geschätzte <a href="https://www.swr.de/wissen/1000-antworten/wie-wird-das-alter-des-universums-berechnet-100.html" target="_blank">Alter des Universums, welches etwa 13.7 Milliarden Jahre (1.37 × 10<sup>10</sup> Jahre)</a> beträgt.
-            </p>
-    </div>
-  </div>
-</div>
-
-<div style="margin-top: 100px;"></div>
-
-TODO: Sachen die noch Interessant sein könnten:
-man weiß wie hashfunktion aufgebaut sind, reverse engineering tdem nicht möglich, jedoch nicht bewiesen. Aber es wird für die meisten verschlüsselungen im Internet verwendet.
-Hashfunktionen keinen Mathematischen hinergrund. Shift von Bits etc. -> Sicher von Quantencomputer?
-
-
-<div style="margin-bottom: 80px;"></div> -->
+TODOS:
+<p>
+  <li>
+    links zu sektions einführen
+  </li>
+<li>
+  collapsable standardmäßig eingeklappt
+</li>
+</p>
+<div style="margin-bottom: 80px;"></div>

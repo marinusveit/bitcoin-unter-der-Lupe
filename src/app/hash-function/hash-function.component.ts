@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 declare var bootstrap: any; // Deklaration für Bootstrap
 
 @Component({
   selector: 'app-hash-function',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule
+  ],
   templateUrl: './hash-function.component.html',
   styleUrl: './hash-function.component.scss'
 })
@@ -15,9 +21,14 @@ export class HashFunctionComponent {
 
   constructor() { }
 
+  // vars for avalanche effect
   hash: string[] = [];
   hashHex: string = '';
   previousHash: string[] = [];
+  // vars for urbildresistenz
+  inputText: string = '';
+  hashBinary: string[] = [];
+  targetHashBinary: string = '1011010000000101011011011111011001101001000111111000110111000111001011100101011000110000001011011101101011010011010001011101011001011111111010101101001111101010110110010010100110010110000010011010100000100110111000100011010001001110101101100011101010100100';
 
   onInput(event: Event): void {
     const input = (event.target as HTMLInputElement).value;
@@ -42,4 +53,12 @@ export class HashFunctionComponent {
       return new bootstrap.Collapse(collapseEl);
     });
   }
+
+    // Function to calculate SHA-256 hash and compare with target hash
+    calculateHash(): void {
+      const hashHex = CryptoJS.SHA256(this.inputText).toString(CryptoJS.enc.Hex);
+      this.hashBinary = this.hexToBinary(hashHex).split(''); // Konvertiere die binäre Zeichenfolge in ein Array von Zeichen
+    }
+
+
 }
