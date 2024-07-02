@@ -92,9 +92,7 @@
                     </div>
                     <p class="card-text">SHA-256 Hash (binär):</p>
                     <div class="alert alert-secondary" role="alert">
-                       <span *ngFor="let bit of hash; let i = index" [ngClass]="{'text-primary': bit !== previousHash[i]}">
-                       {{ bit }}
-                       </span>
+                       <span *ngFor="let bit of hash; let i = index" [ngClass]="{'text-primary': bit !== previousHash[i]}">{{ bit }}</span>
                     </div>
                  </div>
               </div>
@@ -166,7 +164,7 @@
            <div class="col-md-6 offset-md-3">
               <div class="card">
                  <div class="card-body">
-                    <input type="text" class="form-control mb-3" id="inputText" [(ngModel)]="inputText" (input)="calculateHash()" placeholder="Urbild eingeben">
+                    <input type="text" class="form-control mb-3" id="inputText" [(ngModel)]="inputText" (input)="this.hashBinary = calculateHash(inputText)" placeholder="Urbild eingeben">
                     <h5 class="card-title">Hashwert (SHA-256) des Urbilds (binär)</h5>
                     <div class="alert alert-secondary" role="alert">
                        <span *ngFor="let bit of hashBinary; let i = index" [ngClass]="{'text-danger': bit !== targetHashBinary[i]}">{{ bit }}</span>
@@ -181,6 +179,84 @@
         </div>
      </div>
   </div>
+
+  <div class="container mt-4">
+   <h3 class="mb-4" data-bs-toggle="collapse" href="#secondPreimageResistance" role="button" aria-expanded="false" aria-controls="secondPreimageResistance">
+     Zweite Urbildresistenz <i class="bi bi-chevron-down"></i>
+   </h3>
+   <div class="collapse" id="secondPreimageResistance">
+     <p>Zweite Urbildresistenz bedeutet, dass es schwierig sein sollte ein zweites, unterschiedliches Eingabedatum zu finden, das denselben Hashwert ergibt wie ein gegebenes Eingabedatum.</p>
+     <pre class="text-center">h(x1) = h(x2 = ?)    mit x1 &#8800; x2</pre>
+     <div class="row">
+       <div class="col-md-6">
+         <div class="card">
+           <div class="card-body">
+             <input type="text" class="form-control mb-3" [value]="leftInputText" disabled>
+             <h5 class="card-title">Hashwert h(x1)</h5>
+             <div class="alert alert-secondary" role="alert">
+               {{ leftHashBinary }}
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="col-md-6">
+         <div class="card">
+           <div class="card-body">
+             <input type="text" class="form-control mb-3" [(ngModel)]="rightInputText" (input)="this.rightHashBinary = this.calculateHash(rightInputText)" placeholder="Versuche den gleichen Hashwert wie links zu erhalten">
+             <h5 class="card-title">Hashwert h(x2)</h5>
+             <div class="alert alert-secondary" role="alert">
+               <span *ngFor="let bit of rightHashBinary; let i = index" [ngClass]="{'text-danger': bit !== leftHashBinary[i]}">{{ bit }}</span>
+             </div>
+             <div *ngIf="rightInputText === leftInputText" class="alert alert-warning" role="alert">
+               Das rechte Urbild darf nicht mit dem linken Urbild identisch sein.
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+
+
+ <div class="container mt-4">
+   <h3 class="mb-4" data-bs-toggle="collapse" href="#collisionResistance" role="button" aria-expanded="false" aria-controls="collisionResistance">
+     Kollisionsresistenz <i class="bi bi-chevron-down"></i>
+   </h3>
+   <div class="collapse" id="collisionResistance">
+     <p>Kollisionsresistenz bedeutet, dass es schwierig sein sollte, zwei unterschiedliche Eingabedaten zu finden, die denselben Hashwert ergeben.</p>
+     <pre class="text-center">h(x1 = ?) = h(x2 = ?)    mit x1 &#8800; x2</pre>
+     <div class="row">
+       <div class="col-md-6">
+         <div class="card">
+           <div class="card-body">
+             <input type="text" class="form-control mb-3" [(ngModel)]="collisionResistanceX1" (input)="this.leftCollisionResistanceHash = this.calculateHash(collisionResistanceX1)" placeholder="Gebe einen Wert für x1 ein">
+             <h5 class="card-title">Hashwert h(x1)</h5>
+             <div class="alert alert-secondary" role="alert">
+               <span *ngFor="let bit of leftCollisionResistanceHash; let i = index" [ngClass]="{'text-danger': bit !== rightCollisionResistanceHash[i]}">{{ bit }}</span>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="col-md-6">
+         <div class="card">
+           <div class="card-body">
+             <input type="text" class="form-control mb-3" [(ngModel)]="collisionResistanceX2" (input)="this.rightCollisionResistanceHash = this.calculateHash(collisionResistanceX2)" placeholder="Gebe einen Wert für x2 ein">
+             <h5 class="card-title">Hashwert h(x2)</h5>
+             <div class="alert alert-secondary" role="alert">
+               <span *ngFor="let bit of rightCollisionResistanceHash; let i = index" [ngClass]="{'text-danger': bit !== leftCollisionResistanceHash[i]}">{{ bit }}</span>
+             </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div *ngIf="collisionResistanceX1 === collisionResistanceX2" class="alert alert-warning text-center" role="alert">
+     Die beiden Urbilder dürfen nicht identisch sein.
+   </div>
+   </div>
+ </div>
+
+
+
   <div style="margin-top: 100px;"></div>
 </div>
 TODOS:

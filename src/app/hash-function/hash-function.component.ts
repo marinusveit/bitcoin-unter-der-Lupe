@@ -25,10 +25,22 @@ export class HashFunctionComponent {
   hash: string[] = [];
   hashHex: string = '';
   previousHash: string[] = [];
-  // vars for urbildresistenz
+  // vars for preimage resistance
   inputText: string = '';
   hashBinary: string[] = [];
   targetHashBinary: string = '1011010000000101011011011111011001101001000111111000110111000111001011100101011000110000001011011101101011010011010001011101011001011111111010101101001111101010110110010010100110010110000010011010100000100110111000100011010001001110101101100011101010100100';
+  // vars for 2nd preimage resistance
+  leftInputText: string = 'Urbild x1';
+  rightInputText = '';
+  leftHashBinary = this.calculateHash(this.leftInputText).join('');
+  rightHashBinary: string[] = [];
+  // vars for Collision resistance
+  collisionResistanceX1: string = 'x1'
+  collisionResistanceX2: string = 'x2'
+  leftCollisionResistanceHash: string[] = this.calculateHash(this.collisionResistanceX1);
+  rightCollisionResistanceHash: string[] = this.calculateHash(this.collisionResistanceX2);
+
+
 
   onInput(event: Event): void {
     const input = (event.target as HTMLInputElement).value;
@@ -55,9 +67,9 @@ export class HashFunctionComponent {
   }
 
     // Function to calculate SHA-256 hash and compare with target hash
-    calculateHash(): void {
-      const hashHex = CryptoJS.SHA256(this.inputText).toString(CryptoJS.enc.Hex);
-      this.hashBinary = this.hexToBinary(hashHex).split(''); // Konvertiere die binäre Zeichenfolge in ein Array von Zeichen
+    calculateHash(urbild: string): string[] {
+      const hashHex = CryptoJS.SHA256(urbild).toString(CryptoJS.enc.Hex);
+      return this.hexToBinary(hashHex).split(''); // Konvertiere die binäre Zeichenfolge in ein Array von Zeichen
     }
 
 
