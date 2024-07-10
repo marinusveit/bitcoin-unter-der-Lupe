@@ -1,0 +1,69 @@
+<div class="container mt-4" [ngClass]="{'hash-invalid': !isHashValid(), 'hash-valid': isHashValid()}">
+    <h3 class="mb-4">Block-Header</h3>
+
+    <div class="form-group">
+      <label for="blockVersion">Version (4 bytes):</label>
+      <input type="text" id="blockVersion" class="form-control" [(ngModel)]="blockVersion" disabled>
+    </div>
+
+    <div class="form-group">
+      <label for="previousBlockHash">Previous Block Hash (32 bytes):</label>
+      <input type="text" id="previousBlockHash" class="form-control" [(ngModel)]="previousBlockHash" (ngModelChange)="updateHash()">
+    </div>
+
+    <div class="form-group">
+      <label for="merkleRootHash">Merkle Root Hash (32 bytes):</label>
+      <input type="text" id="merkleRootHash" class="form-control" [(ngModel)]="merkleRootHash" (ngModelChange)="updateHash()">
+    </div>
+
+    <div class="form-group">
+      <label for="timestamp">Time (4 bytes):</label>
+      <input type="text" id="timestamp" class="form-control" [(ngModel)]="timestamp" disabled>
+    </div>
+
+    <div class="form-row row">
+        <div class="form-group col-md-6">
+          <label for="nBits">Bits (4 bytes, decimal): </label>
+          <i class="bi bi-info-circle ms-2" (click)="toggleAdvancedInfo()" style="cursor: pointer;"></i>
+          <input type="text" id="nBits" class="form-control" [(ngModel)]="nBits" (ngModelChange)="updateTarget()">
+        </div>
+        <div *ngIf="showAdvancedInfo" class="form-group col-md-6">
+          <label for="nBitsHex">Bits (Hex):</label>
+          <input type="text" id="nBitsHex" class="form-control" [value]="nBits.toString(16).padStart(8, '0')" disabled>
+        </div>
+        <div *ngIf="showAdvancedInfo" class="form-group col-md-12">
+            <label for="target">Target:</label>
+            <input type="text" id="target" class="form-control" [value]="target" disabled>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nonce">Nonce (4 bytes):</label>
+      <input type="text" id="nonce" class="form-control" [(ngModel)]="nonce" disabled>
+    </div>
+
+    <div class="form-group">
+      <label for="hash">Hash:</label>
+      <input type="text" id="hash" class="form-control" [(ngModel)]="hash" disabled>
+    </div>
+    <div class="form-group">
+      <small class="form-text text-muted">Der Hexwert des Hashs muss kleiner sein als der Hexwert des Targets ({{ this.target }}).</small>
+    </div>
+
+    <button class="btn btn-primary" (click)="mine()">Mine</button>
+
+</div>
+<div class="mt-4">
+  <h5>Erklärung der Block-Header Felder</h5>
+  <ul>
+    <li><strong>Version (4 bytes):</strong> Die Block-Versionnummer.</li>
+    <li><strong>Previous Block Hash (32 bytes):</strong> Der Hash des vorherigen Blocks.</li>
+    <li><strong>Merkle Root Hash (32 bytes):</strong> Der Root-Hash des Merkle-Baums der Transaktionen im Block.</li>
+    <li><strong>Time (4 bytes):</strong> Der Zeitstempel des Blocks.</li>
+    <li><strong>Bits (4 bytes):</strong> Die Schwierigkeit des Proof-of-Work als Dezimalwert.</li>
+    <li><strong>Bits (Hex):</strong> Die Schwierigkeit des Proof-of-Work als Hexadezimalwert.</li>
+    <li><strong>Target (256-bit):</strong> Der Zielwert, den der Hash unterschreiten muss.</li>
+    <li><strong>Nonce (4 bytes):</strong> Die Nonce, die den Hash verändert, um das Mining zu ermöglichen.</li>
+    <li><strong>Hash:</strong> Der berechnete Hash des Blocks.</li>
+  </ul>
+</div>
