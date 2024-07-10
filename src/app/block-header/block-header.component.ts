@@ -10,6 +10,8 @@ import * as crypto from 'crypto-js';
   templateUrl: './block-header.component.html',
   styleUrls: ['./block-header.component.scss']
 })
+
+// TODO: schwierigkeit noh einmal überprüfen, darf nicht zu schwierig sein, außerdem bin ich mir nicht sicher, ob die umrechnung auch wirklich stimmt. kurz ein paar werte mit https://learnmeabitcoin.com/technical/block/bits/ geprüft, sieht ganz gut aus
 export class BlockHeaderComponent {
   blockVersion: number = 1;
   previousBlockHash: string = '';
@@ -20,6 +22,7 @@ export class BlockHeaderComponent {
   hash: string = '';
   target: string = '';
   showAdvancedInfo: boolean = false;
+  nBitsWarning: string = '';
 
   constructor() {
     this.updateTarget();
@@ -35,6 +38,12 @@ export class BlockHeaderComponent {
   }
 
   updateTarget() {
+    if (this.nBits < 0x1e00ffff) {
+      this.nBitsWarning = 'Die Schwierigkeit darf nicht kleiner als 0x1e00ffff sein.';
+      this.nBits = 0x1e00ffff;
+    } else {
+      this.nBitsWarning = '';
+    }
     this.target = this.calculateTarget(this.nBits);
     this.updateHash();
   }
@@ -63,5 +72,4 @@ export class BlockHeaderComponent {
   toggleAdvancedInfo() {
     this.showAdvancedInfo = !this.showAdvancedInfo;
   }
-
 }
