@@ -8,15 +8,15 @@
     <label for="nonce">Nonce:</label>
     <input type="text" id="nonce" class="form-control" [(ngModel)]="nonce" disabled>
   </div>
-  <div class="row">
+  <div class="form-row">
     <div class="form-group col-md-6">
       <label for="leadingZeros">Führende Nullen:</label>
-      <input type="number" id="leadingZeros" class="form-control" [(ngModel)]="leadingZeros" (ngModelChange)="updateNBits()">
-      <small *ngIf="leadingZeros > this.maxLeadingZeros" class="form-text text-danger">Die Anzahl der führenden Nullen darf nicht mehr als {{ this.maxLeadingZeros }} betragen, um die Berechnung in akzeptabler Zeit zu halten. Der Hash wird nur bis zu {{ this.maxLeadingZeros }} führende Nullen berechnet.</small>
+      <input type="number" id="leadingZeros" class="form-control" [(ngModel)]="leadingZeros" (ngModelChange)="updateNBits()" min="0" max="8">
+      <small *ngIf="leadingZeros > 8" class="form-text text-danger">Die Anzahl der führenden Nullen darf nicht mehr als 8 betragen, um die Berechnung in akzeptabler Zeit zu halten. Der Hash wird nur bis zu 8 führende Nullen berechnet.</small>
     </div>
     <div class="form-group col-md-6">
-      <label for="nBitsHex">nBits (Darstellung wie in Bitcoinheader):</label>
-      <input type="text" id="nBitsHex" class="form-control" [value]="'0x' + nBitsHex" disabled>
+      <label for="nBitsHex">nBits (Hex):</label>
+      <input type="text" id="nBitsHex" class="form-control" [value]="nBitsHex" disabled>
     </div>
   </div>
   <div class="form-group">

@@ -20,12 +20,15 @@ export class BlockComponent {
   target: string = '';
   nBitsHex: string = '';
   requiredZeros: string = '';
-  readonly maxLeadingZeros: number = 8;
 
   constructor() {
     this.updateNBits();
     this.updateTarget();
     this.hash = this.calculateHash();
+    console.log('Erwartet: 1c010000; berechnet: ' + this.leadingZerosToNBits(2).toString(16).padStart(8, '0')); // Erwartet: '1c010000'
+    console.log('Erwartet: 1c00ffff; berechnet: ' + this.leadingZerosToNBits(4).toString(16).padStart(8, '0')); // Erwartet: '1c00ffff'
+    console.log('Erwartet: 1b0404cb; berechnet: ' + this.leadingZerosToNBits(8).toString(16).padStart(8, '0')); // Erwartet: '1b0404cb'
+
   }
 
   calculateHash(): string {
@@ -37,21 +40,26 @@ export class BlockComponent {
   }
 
   updateNBits() {
-    let adjustedLeadingZeros = this.leadingZeros > this.maxLeadingZeros ? this.maxLeadingZeros : this.leadingZeros;
+    let adjustedLeadingZeros = this.leadingZeros > 8 ? 8 : this.leadingZeros;
     this.nBits = this.leadingZerosToNBits(adjustedLeadingZeros);
-    this.nBitsHex = this.nBits.toString(16);
+    this.nBitsHex = this.nBits.toString(16).padStart(8, '0');
     this.updateTarget();
   }
 
   leadingZerosToNBits(leadingZeros: number): number {
-    const exponent = 3 + Math.ceil(leadingZeros / 2);
+    const exponent = 3 + Math.floor(leadingZeros / 2);
     const mantissa = Math.pow(2, (8 * (exponent - 3)) - leadingZeros);
-    return (exponent << 24) | mantissa;
+
+    // Berechnung des Mantissenwerts gemäß Bitcoin-Spezifikation
+    const mantissaInt = Math.floor(mantissa);
+    const nBits = (exponent << 24) | mantissaInt;
+
+    return nBits;
   }
 
   updateTarget() {
     this.target = this.calculateTarget(this.nBits);
-    this.requiredZeros = '0'.repeat(this.leadingZeros > this.maxLeadingZeros ? this.maxLeadingZeros : this.leadingZeros);
+    this.requiredZeros = '0'.repeat(this.leadingZeros > 8 ? 8 : this.leadingZeros);
     this.updateHash();
   }
 
