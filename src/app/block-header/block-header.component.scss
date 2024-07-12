@@ -18,3 +18,29 @@
   .hash-invalid {
     background-color: #fca5a5;
   }
+
+  // li {
+  //   display: flex;
+  //   align-items: flex-start;
+  //   margin-bottom: 4px;
+  // }
+
+  .label {
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
+
+  .explanation {
+    flex-grow: 1;
+  }
+
+
+  p {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+
+  li {
+    margin-left: 10px;
+  }

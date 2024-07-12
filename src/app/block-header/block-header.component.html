@@ -1,70 +1,136 @@
 <div class="container mt-4" [ngClass]="{'hash-invalid': !isHashValid(), 'hash-valid': isHashValid()}">
     <h3 class="mb-4">Block-Header</h3>
 
-    <div class="form-group">
-      <label for="blockVersion">Version (4 bytes):</label>
-      <input type="text" id="blockVersion" class="form-control" [(ngModel)]="blockVersion" disabled>
+    <div class="form-group col-md-6">
+        <label for="blockVersion">Version (4 bytes):</label>
+        <input type="text" id="blockVersion" class="form-control" [(ngModel)]="blockVersion" disabled>
     </div>
 
     <div class="form-group">
-      <label for="previousBlockHash">Previous Block Hash (32 bytes):</label>
-      <input type="text" id="previousBlockHash" class="form-control" [(ngModel)]="previousBlockHash" (ngModelChange)="updateHash()">
+        <label for="previousBlockHash">Previous Block Hash (32 bytes):</label>
+        <input type="text" id="previousBlockHash" class="form-control" [(ngModel)]="previousBlockHash"
+            (ngModelChange)="updateHash()">
     </div>
 
     <div class="form-group">
-      <label for="merkleRootHash">Merkle Root Hash (32 bytes):</label>
-      <input type="text" id="merkleRootHash" class="form-control" [(ngModel)]="merkleRootHash" (ngModelChange)="updateHash()">
+        <label for="merkleRootHash">Merkle Root Hash (32 bytes):</label>
+        <input type="text" id="merkleRootHash" class="form-control" [(ngModel)]="merkleRootHash"
+            (ngModelChange)="updateHash()">
     </div>
 
-    <div class="form-group">
-      <label for="timestamp">Time (4 bytes):</label>
-      <input type="text" id="timestamp" class="form-control" [(ngModel)]="timestamp" disabled>
+    <div class="form-group col-md-6">
+        <label for="timestamp">Time (4 bytes):</label>
+        <input type="text" id="timestamp" class="form-control" [(ngModel)]="timestamp" disabled>
     </div>
 
     <div class="form-row row">
-      <div class="form-group col-md-6">
-        <label for="nBits">Bits (4 bytes, decimal):</label>
-        <i class="bi bi-info-circle ms-2" (click)="toggleAdvancedInfo()" style="cursor: pointer;"></i>
-        <input type="number" id="nBits" class="form-control" [(ngModel)]="nBits" (ngModelChange)="updateTarget()" min="0x1e00ffff">
-        <small *ngIf="nBitsWarning" class="form-text text-danger">{{ nBitsWarning }}</small>
-      </div>
-      <div *ngIf="showAdvancedInfo" class="form-group col-md-6">
-        <label for="nBitsHex">Bits (Hex):</label>
-        <input type="text" id="nBitsHex" class="form-control" [value]="nBits.toString(16).padStart(8, '0')" disabled>
-      </div>
-      <div *ngIf="showAdvancedInfo" class="form-group col-md-12">
-        <label for="target">Target:</label>
-        <input type="text" id="target" class="form-control" [value]="target" disabled>
-      </div>
+        <div class="form-group col-md-6" style="padding-right: 0px;">
+            <label for="nBits">Bits (4 bytes, decimal):</label>
+            <i class="bi bi-info-circle ms-2" (click)="toggleAdvancedInfo()" style="cursor: pointer;"></i>
+            <input type="number" id="nBits" class="form-control" [(ngModel)]="nBits" (ngModelChange)="updateTarget()"
+                min="0x1e00ffff">
+            <small *ngIf="nBitsWarning" class="form-text text-danger">{{ nBitsWarning }}</small>
+        </div>
+        <div *ngIf="showAdvancedInfo" class="form-group col-md-6">
+            <label for="nBitsHex">Bits (Hex):</label>
+            <input type="text" id="nBitsHex" class="form-control" [value]="nBits.toString(16).padStart(8, '0')"
+                disabled>
+        </div>
+        <div *ngIf="showAdvancedInfo" class="form-group col-md-12">
+            <label for="target">Target:</label>
+            <input type="text" id="target" class="form-control" [value]="target" disabled>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label for="nonce">Nonce (4 bytes):</label>
+        <input type="text" id="nonce" class="form-control" [(ngModel)]="nonce" disabled>
     </div>
 
     <div class="form-group">
-      <label for="nonce">Nonce (4 bytes):</label>
-      <input type="text" id="nonce" class="form-control" [(ngModel)]="nonce" disabled>
-    </div>
-
-    <div class="form-group">
-      <label for="hash">Hash:</label>
-      <input type="text" id="hash" class="form-control" [(ngModel)]="hash" disabled>
+        <label for="hash">Hash:</label>
+        <input type="text" id="hash" class="form-control" [(ngModel)]="hash" disabled>
     </div>
     <div class="form-group">
-      <small class="form-text text-muted">Der Hexwert des Hashs muss kleiner sein als der Hexwert des Targets ({{ target }}).</small>
+        <small class="form-text text-muted">Der Hexwert des Hashs muss kleiner sein als der Hexwert des Targets ({{
+            target }}).</small>
     </div>
 
     <button class="btn btn-primary" (click)="mine()">Mine</button>
-  </div>
+</div>
 
-  <div class="mt-4">
-    <h5>Erklärung der Block-Header Felder</h5>
+<div class="m-4">
+    <h5>Block-Header Felder</h5>
     <ul>
-      <li><strong>Version (4 bytes):</strong> Die Block-Versionnummer.</li>
-      <li><strong>Previous Block Hash (32 bytes):</strong> Der Hash des vorherigen Blocks.</li>
-      <li><strong>Merkle Root Hash (32 bytes):</strong> Der Root-Hash des Merkle-Baums der Transaktionen im Block.</li>
-      <li><strong>Time (4 bytes):</strong> Der Zeitstempel des Blocks.</li>
-      <li><strong>Bits (4 bytes):</strong> Die Schwierigkeit des Proof-of-Work als Dezimalwert.</li>
-      <li><strong>Bits (Hex):</strong> Die Schwierigkeit des Proof-of-Work als Hexadezimalwert.</li>
-      <li><strong>Target (256-bit):</strong> Der Zielwert, den der Hash unterschreiten muss.</li>
-      <li><strong>Nonce (4 bytes):</strong> Die Nonce, die den Hash verändert, um das Mining zu ermöglichen.</li>
-      <li><strong>Hash:</strong> Der berechnete Hash des Blocks.</li>
+        <p>
+            <span class="label"><strong>Version:</strong> </span>
+            <span class="explanation">
+                <li>4 Byte groß</li>
+                <li>Gibt an, welcher Regelsatz für die Blockvalidierung zu befolgen ist</li>
+            </span>
+        </p>
+        <p>
+            <span class="label"><strong>Previous Block Hash:</strong></span>
+            <span>
+                <li>32 Byte groß</li>
+                <li>SHA256(SHA256()) Hash des Headers des vorherigen Blocks</li>
+                <li>Stellt sicher, dass kein vorheriger Block geändert werden kann, ohne dass auch der Header des aktuellen Blocks geändert wird</li>
+            </span>
+            </p>
+        <p>
+            <span class="label"><strong>Merkle Root Hash:</strong></span>
+            <span class="explanation">
+                <li>32 Byte groß</li>
+                <li>SHA256(SHA256()) Hash</li>
+                <li>Wird aus den Hashes aller in diesem Block enthaltenen Transaktionen erzeugt</li>
+                <li>Keine dieser Transaktionen kann geändert werden, ohne den Header Hash zu ändern</li>
+            </span>
+        </p>
+        <p>
+            <span class="label"><strong>Time:</strong></span>
+            <span class="explanation">
+                <li>4 Byte groß</li>
+                <li>Unixzeit, zu der der Miner mit dem Hashing des Headers begonnen hat (nach Angaben des Miners)</li>
+                <li>Muss größer sein als die mittlere Zeit der vorherigen 11 Blöcke</li>
+                <li>Full Nodes akzeptieren keine Blöcke, deren Header nach ihrer Uhr mehr als zwei Stunden in der Zukunft liegen</li>
+                <li>Wird verwendet, um die Schwierigkeit (Bits) einzustellen</li>
+            </span>
+        </p>
+        <p>
+            <span class="label"><strong>Bits:</strong></span>
+            <span class="explanation">
+                <li>4 Byte groß</li>
+                <li>Die Schwierigkeit des Proof-of-Work</li>
+                <li>Wird in Compact Format angegeben, daraus kann ein 32 Byte großer Target -Wert bestimmt werden</li>
+                <li>Der Hashwert des Blocks muss kleiner oder gleich dem Target-Wert sein</li>
+            </span>
+        </p>
+        <!-- <p>
+            <span class="label"><strong>Bits (Hex):</strong></span>
+            <span class="explanation">
+                Die Schwierigkeit des Proof-of-Work als Hexadezimalwert.
+            </span>
+        </p>
+        <p>
+            <span class="label"><strong>Target (256-bit):</strong></span><span class="explanation">
+                Der Zielwert, den der Hash unterschreiten muss.
+            </span>
+        </p> -->
+        <p>
+            <span class="label"><strong>Nonce:</strong></span><span class="explanation">
+                <li>4 Byte groß</li>
+                <li>wird solange hochgezählt, bis Hash kleiner gleich dem Target-Wert ist</li>
+                <li>Ermöglicht mining</li>
+                <li>Es kann sein, dass 4 Byte nicht ausreichen um einen Hash kleiner dem Target-Wert zu finden &rArr; Time und Merkleroot können geändert werden um anschließend erneut zu minen</li>
+            </span>
+        </p>
+        <p>
+            <span class="label"><strong>Hash:</strong></span>
+            <span class="explanation">
+                <li>32 Byte groß</li>
+                <li>Der berechnete Hash des Blocks</li>
+
+            </span>
+        </p>
     </ul>
-  </div>
+</div>

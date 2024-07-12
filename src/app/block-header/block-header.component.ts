@@ -23,6 +23,7 @@ export class BlockHeaderComponent {
   target: string = '';
   showAdvancedInfo: boolean = false;
   nBitsWarning: string = '';
+  maxDifficulty: number = 1.1042793496663079e+71
 
   constructor() {
     this.updateTarget();
@@ -30,7 +31,7 @@ export class BlockHeaderComponent {
   }
 
   calculateHash(): string {
-    return crypto.SHA256(this.blockVersion + this.previousBlockHash + this.merkleRootHash + this.timestamp + this.nBits + this.nonce).toString();
+    return crypto.SHA256(crypto.SHA256(this.blockVersion + this.previousBlockHash + this.merkleRootHash + this.timestamp + this.nBits + this.nonce)).toString();
   }
 
   updateHash() {
@@ -48,11 +49,23 @@ export class BlockHeaderComponent {
     this.updateHash();
   }
 
+  // calculateTarget(nBits: number): string {
+  //   const exponent = nBits >> 24;
+  //   const mantissa = nBits & 0xFFFFFF;
+  //   let target = mantissa * Math.pow(2, 8 * (exponent - 3));
+  //   return target.toString(16).padStart(64, '0');
+  // }
+
   calculateTarget(nBits: number): string {
     const exponent = nBits >> 24;
     const mantissa = nBits & 0xFFFFFF;
     let target = mantissa * Math.pow(2, 8 * (exponent - 3));
-    return target.toString(16).padStart(64, '0');
+    let targetWithLeadingZeros = target.toString(16).padStart(64, '0')
+    if (target < this.maxDifficulty){
+      this.nBitsWarning = `Der Target Value (=${ targetWithLeadingZeros }) ist zu klein, wählen Sie bitte einen anderen Bits Wert, sodass das Mining nicht zu lange dauert`;
+      return this.maxDifficulty.toString(16).padStart(64, '0');
+    }
+    return targetWithLeadingZeros
   }
 
   isHashValid(): boolean {
