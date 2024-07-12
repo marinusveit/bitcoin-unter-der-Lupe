@@ -1,0 +1,67 @@
+.merkle-tree {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .level {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    position: relative;
+  }
+
+  .node {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 0 5px;
+    text-align: center;
+  }
+
+  .hash-label {
+    font-weight: bold;
+  }
+
+  .hash-value {
+    margin-top: 5px;
+  }
+
+  .transactions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .transaction {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 0 5px;
+    text-align: center;
+  }
+
+  .arrows {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 20px;
+  }
+
+  .arrow-level {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .arrow {
+    position: relative;
+  }
+
+  .line {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 1px solid #000;
+    height: 20px;
+  }

@@ -1,0 +1,24 @@
+<div class="merkle-tree">
+    <div *ngFor="let level of tree; let i = index" class="level">
+      <div *ngFor="let node of level" class="node">
+        <div class="hash-label">{{ node.label }}</div>
+        <div class="hash-value">{{ node.hash }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="transactions">
+    <div *ngFor="let block of dataBlocks" class="transaction">
+      {{ block }}
+    </div>
+  </div>
+
+  <div class="arrows">
+    <div *ngFor="let level of tree; let i = index" class="arrow-level">
+      <div *ngFor="let node of level; let j = index" class="arrow">
+        <div *ngIf="i < tree.length - 1 && j % 2 === 0" class="line">
+          |
+        </div>
+      </div>
+    </div>
+  </div>
