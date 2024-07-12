@@ -10,13 +10,16 @@
     justify-content: center;
     margin: 10px 0;
     position: relative;
+    flex-wrap: wrap; /* Allow wrapping for readability */
   }
 
   .node {
     border: 1px solid #ccc;
     padding: 10px;
-    margin: 0 5px;
+    margin: 5px;
     text-align: center;
+    word-break: break-all; /* Ensure long text breaks appropriately */
+    max-width: 200px; /* Set a max width to keep the nodes readable */
   }
 
   .hash-label {
@@ -25,43 +28,20 @@
 
   .hash-value {
     margin-top: 5px;
+    font-size: smaller; /* Reduce font size for better readability */
   }
 
   .transactions {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    flex-wrap: wrap; /* Allow wrapping for readability */
   }
 
   .transaction {
     border: 1px solid #ccc;
     padding: 10px;
-    margin: 0 5px;
+    margin: 5px;
     text-align: center;
-  }
-
-  .arrows {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 20px;
-  }
-
-  .arrow-level {
-    display: flex;
-    justify-content: center;
-    position: relative;
-  }
-
-  .arrow {
-    position: relative;
-  }
-
-  .line {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-left: 1px solid #000;
-    height: 20px;
+    max-width: 200px; /* Set a max width to keep the nodes readable */
   }

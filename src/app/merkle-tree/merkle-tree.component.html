@@ -1,24 +1,33 @@
-<div class="merkle-tree">
-    <div *ngFor="let level of tree; let i = index" class="level">
-      <div *ngFor="let node of level" class="node">
-        <div class="hash-label">{{ node.label }}</div>
-        <div class="hash-value">{{ node.hash }}</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="transactions">
-    <div *ngFor="let block of dataBlocks" class="transaction">
-      {{ block }}
-    </div>
-  </div>
-
-  <div class="arrows">
-    <div *ngFor="let level of tree; let i = index" class="arrow-level">
-      <div *ngFor="let node of level; let j = index" class="arrow">
-        <div *ngIf="i < tree.length - 1 && j % 2 === 0" class="line">
-          |
+<div class="container mt-5">
+    <div class="row">
+        <div class="col text-center">
+            <h4>Merkle Tree</h4>
+            <div class="merkle-tree">
+                <div *ngFor="let level of tree; let i = index" class="mb-3">
+                    <div class="d-flex justify-content-center flex-wrap ">
+                        <div *ngFor="let node of level" class="card m-2 p-2 col">
+                            <div class="card-body">
+                                <div class="card-title">{{ node.label }}</div>
+                                <div class="hash-value small">Hash: {{ node.hash }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+
+    <div class="row mb-3">
+        <div class="col text-center">
+            <div class="d-flex justify-content-center flex-wrap">
+                <div *ngFor="let block of dataBlocks" class="card col m-2">
+                    <div class="card-body ">
+                        <div class="card-title">
+                            {{ block }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

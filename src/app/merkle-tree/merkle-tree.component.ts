@@ -10,9 +10,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./merkle-tree.component.scss']
 })
 export class MerkleTreeComponent implements OnInit {
-  dataBlocks: string[] = ['Transaction A', 'Transaction B', 'Transaction C', 'Transaction D', 'Transaction E'];
+  dataBlocks: string[] = ['Tx A', 'Tx B', 'Tx C', 'Tx C'];
   tree: { hash: string, label: string }[][] = [];
-
+  math = Math;
   constructor() { }
 
   ngOnInit() {
@@ -38,7 +38,11 @@ export class MerkleTreeComponent implements OnInit {
             label: `Hash(${currentLevel[i].label} + ${currentLevel[i + 1].label})`
           });
         } else {
-          nextLevel.push(currentLevel[i]);
+          const combinedData = currentLevel[i].hash + currentLevel[i].hash;
+          nextLevel.push({
+            hash: this.hash(combinedData),
+            label: `Hash(${currentLevel[i].label} + ${currentLevel[i].label})`
+          });
         }
       }
 
