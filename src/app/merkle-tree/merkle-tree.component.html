@@ -1,12 +1,22 @@
 <div class="container mt-5">
     <div class="row">
+        <h4 class="text-center">Merkle Tree</h4>
+        <div class="text-left">
+            <p class="text-left">
+                Ein Merkle-Tree ist eine Datenstruktur, die aus Hashes besteht und in einer baumartigen Hierarchie organisiert ist. Jedes Blatt des Baums enthält einen Hash eines Datenblocks, und jeder nicht-blatt-Knoten enthält den Hash seiner Kinder. Dies führt zu einem einzigen Hash an der Wurzel, der als Merkle-Root bezeichnet wird.
+                In Bitcoin werden Merkle-Trees eingesetzt, um die Integrität und Effizienz der Transaktionsverifizierung zu gewährleisten. Sie ermöglichen es, große Mengen von Transaktionen zu einem einzigen Hash zusammenzufassen. Das ist wichtig, weil:
+            </p>
+            <p><b>Effizienz:</b> Merkle-Trees erlauben schnelle und effiziente Verifizierung, ob eine Transaktion in einem Block enthalten ist, ohne dass man den gesamten Block durchsuchen muss.</p>
+            <p><b>Sicherheit:</b> Sie stellen sicher, dass keine Manipulation der Transaktionen im Block stattgefunden hat, da jede Änderung einen anderen Merkle-Root erzeugen würde.</p>
+            <p><b>Speichereffizienz:</b> Anstatt alle Transaktionen zu speichern, reicht es, die Merkle-Root zu speichern, was den Speicherbedarf reduziert.</p>
+        </div>
         <div class="col text-center">
-            <h4>Merkle Tree</h4>
             <div class="merkle-tree">
-                <div *ngFor="let level of tree; let i = index" class="mb-3">
+                <div *ngFor="let level of tree; let i = index, last as isLast" class="mb-3">
                     <div class="d-flex justify-content-center flex-wrap ">
                         <div *ngFor="let node of level" class="card m-2 p-2 col">
                             <div class="card-body">
+                                <div *ngIf="isLast" class="card-title mb-2 fw-bold">Merkle Root</div>
                                 <div class="card-title">{{ node.label }}</div>
                                 <div class="hash-value small">Hash: {{ node.hash }}</div>
                             </div>
