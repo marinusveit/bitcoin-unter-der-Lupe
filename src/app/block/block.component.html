@@ -1,34 +1,71 @@
+<div *ngIf="block" class="container mt-5">
+    <h2>Block Details</h2>
+    <p>Der im JSON Format gezeigte Block ist der <a href="https://www.house-of-satoshi.ch/der-3-januar-und-der-bitcoin-genesis-block/" target="_blank">Genesis Block</a> und wurde über die <a href="https://www.blockchain.com/de/explorer/api/blockchain_api" target="_blank">blockchain.com API</a> heruntergeladen.</p>
+    <p>Man erkennt den Genesis Block an dem <code>"prev_block": "0000000000000000000000000000000000000000000000000000000000000000"</code>.</p>
+    <pre>
+      <code [highlight]="block | json"
+      language="json"></code>
+    </pre>
+  </div>
+
+
 <div class="container mt-4" [ngClass]="{'hash-invalid': !isHashValid(), 'hash-valid': isHashValid()}">
   <h3 class="mb-4">Block</h3>
+
+  <div class="form-group col-md-6">
+      <label for="blockVersion">Version (4 bytes):</label>
+      <input type="text" id="blockVersion" class="form-control" [(ngModel)]="blockVersion" disabled>
+  </div>
+
   <div class="form-group">
-    <label for="blockNumber">Block:</label>
-    <input type="text" id="blockNumber" class="form-control" [(ngModel)]="blockNumber" disabled>
+      <label for="previousBlockHash">Previous Block Hash (32 bytes):</label>
+      <input type="text" id="previousBlockHash" class="form-control" [(ngModel)]="previousBlockHash"
+          (ngModelChange)="updateHash()">
+  </div>
+
+  <div class="form-group">
+      <label for="merkleRootHash">Merkle Root Hash (32 bytes):</label>
+      <input type="text" id="merkleRootHash" class="form-control" [(ngModel)]="merkleRootHash"
+          (ngModelChange)="updateHash()">
+  </div>
+
+  <div class="form-group col-md-6">
+      <label for="timestamp">Time (4 bytes):</label>
+      <input type="text" id="timestamp" class="form-control" [(ngModel)]="timestamp" disabled>
+  </div>
+
+  <div class="form-row row">
+      <div class="form-group col-md-6" style="padding-right: 0px;">
+          <label for="nBits">Bits (4 bytes, decimal):</label>
+          <i class="bi bi-info-circle ms-2" (click)="toggleAdvancedInfo()" style="cursor: pointer;"></i>
+          <input type="number" id="nBits" class="form-control" [(ngModel)]="nBits" (ngModelChange)="updateTarget()"
+              min="0x1e00ffff">
+          <small *ngIf="nBitsWarning" class="form-text text-danger">{{ nBitsWarning }}</small>
+      </div>
+      <div *ngIf="showAdvancedInfo" class="form-group col-md-6">
+          <label for="nBitsHex">Bits (Hex):</label>
+          <input type="text" id="nBitsHex" class="form-control" [value]="nBits.toString(16).padStart(8, '0')"
+              disabled>
+      </div>
+      <div *ngIf="showAdvancedInfo" class="form-group col-md-12">
+          <label for="target">Target:</label>
+          <input type="text" id="target" class="form-control" [value]="target" disabled>
+      </div>
+  </div>
+
+  <div class="form-group col-md-6">
+      <label for="nonce">Nonce (4 bytes):</label>
+      <input type="text" id="nonce" class="form-control" [(ngModel)]="nonce" disabled>
+  </div>
+
+  <div class="form-group">
+      <label for="hash">Hash:</label>
+      <input type="text" id="hash" class="form-control" [(ngModel)]="hash" disabled>
   </div>
   <div class="form-group">
-    <label for="nonce">Nonce:</label>
-    <input type="text" id="nonce" class="form-control" [(ngModel)]="nonce" disabled>
+      <small class="form-text text-muted">Der Hexwert des Hashs muss kleiner sein als der Hexwert des Targets ({{
+          target }}).</small>
   </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="leadingZeros">Führende Nullen:</label>
-      <input type="number" id="leadingZeros" class="form-control" [(ngModel)]="leadingZeros" (ngModelChange)="updateNBits()" min="0" max="8">
-      <small *ngIf="leadingZeros > 8" class="form-text text-danger">Die Anzahl der führenden Nullen darf nicht mehr als 8 betragen, um die Berechnung in akzeptabler Zeit zu halten. Der Hash wird nur bis zu 8 führende Nullen berechnet.</small>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="nBitsHex">nBits (Hex):</label>
-      <input type="text" id="nBitsHex" class="form-control" [value]="nBitsHex" disabled>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="data">Daten:</label>
-    <textarea id="data" class="form-control" rows="3" [(ngModel)]="data" (ngModelChange)="updateHash()"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="hash">Hash:</label>
-    <input type="text" id="hash" class="form-control" [(ngModel)]="hash" disabled>
-  </div>
-  <div class="form-group">
-    <small class="form-text text-muted">Hash muss mit {{ requiredZeros }} beginnen.</small>
-  </div>
+
   <button class="btn btn-primary" (click)="mine()">Mine</button>
 </div>
