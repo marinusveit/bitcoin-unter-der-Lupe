@@ -1,0 +1,56 @@
+<div class="transaction card mb-3">
+    <div class="card-header">
+      <h5 class="card-title">Transaction ID: {{ txId }}</h5>
+    </div>
+    <div class="card-body">
+      <div class="inputs">
+        <h6>Inputs</h6>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let input of inputs">
+            <strong>Previous Tx Hash:</strong> {{ input.previousTxHash }}<br>
+            <strong>Output Index:</strong> {{ input.outputIndex }}<br>
+            <strong>ScriptSig:</strong> {{ input.scriptSig }}
+          </li>
+        </ul>
+      </div>
+      <div class="outputs mt-3">
+        <h6>Outputs</h6>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let output of outputs">
+            <strong>Value:</strong> {{ output.value }} Satoshis<br>
+            <strong>ScriptPubKey:</strong> {{ output.scriptPubKey }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- <div *ngFor="let transaction of transactions">
+    <div class="transaction card mb-3">
+        <div class="card-header">
+          <h5 class="card-title">Transaction ID: {{ transaction.txId }}</h5>
+        </div>
+        <div class="card-body">
+          <div class="inputs">
+            <h6>Inputs</h6>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let input of transaction.inputs">
+                <strong>Previous Tx Hash:</strong> {{ input.previousTxHash }}<br>
+                <strong>Output Index:</strong> {{ input.outputIndex }}<br>
+                <strong>ScriptSig:</strong> {{ input.scriptSig }}
+              </li>
+            </ul>
+          </div>
+          <div class="outputs mt-3">
+            <h6>Outputs</h6>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let output of transaction.outputs">
+                <strong>Value:</strong> {{ output.value }} Satoshis<br>
+                <strong>ScriptPubKey:</strong> {{ output.scriptPubKey }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</div> -->

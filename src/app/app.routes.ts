@@ -5,6 +5,7 @@ import { SignatureComponent } from './signature/signature.component';
 import { BlockHeaderComponent } from './block-header/block-header.component';
 import { BlockComponent } from './block/block.component';
 import { MerkleTreeComponent } from './merkle-tree/merkle-tree.component';
+import { TransactionComponent } from './transaction/transaction.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -12,5 +13,6 @@ export const routes: Routes = [
   { path: 'signatures', component: SignatureComponent },
   { path: 'merkletree', component: MerkleTreeComponent },
   { path: 'blockheader', component: BlockHeaderComponent },
+  { path: 'transaction', component: TransactionComponent },
   { path: 'block', component: BlockComponent },
 ];

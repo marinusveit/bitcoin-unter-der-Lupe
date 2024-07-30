@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import * as crypto from 'crypto-js';
 import { DataService } from '../data.service';
 import { HIGHLIGHT_OPTIONS, Highlight, HighlightAuto } from 'ngx-highlightjs';
+import { TransactionComponent } from '../transaction/transaction.component';
 // import 'highlight.js/styles/androidstudio.min.css'; // anderes farb scheme für code
-
+import { exampleTransactions } from '../../assets/data/transactions';
 
 @Component({
   selector: 'app-block',
   standalone: true,
-  imports: [CommonModule, FormsModule, Highlight, HighlightAuto,],
+  imports: [CommonModule, FormsModule, Highlight, HighlightAuto, TransactionComponent],
   templateUrl: './block.component.html',
   styleUrls: ['./block.component.scss'],
   providers: [DataService,
@@ -38,6 +39,10 @@ export class BlockComponent implements OnInit {
   maxDifficulty: number = 1.1042793496663079e+71
 
   block: any; // um block aus json file zu laden
+
+
+  @Input() transactions = exampleTransactions;
+  showTransactions: boolean = false; // Für das Anzeigen/Verbergen der Transaktionen
 
   ngOnInit(): void {
     this.dataService.getBlock().subscribe(data => {
@@ -104,5 +109,9 @@ export class BlockComponent implements OnInit {
 
   toggleAdvancedInfo() {
     this.showAdvancedInfo = !this.showAdvancedInfo;
+  }
+
+  toggleTransactions() {
+    this.showTransactions = !this.showTransactions;
   }
 }
