@@ -15,22 +15,11 @@
 
     </h3>
 
-  <!-- <div class="form-group col-md-6">
-      <label for="blockVersion">Version (4 bytes):</label>
-      <input type="text" id="blockVersion" class="form-control" [(ngModel)]="blockVersion" disabled>
-  </div> -->
-
   <div class="form-group">
       <label for="previousBlockHash">Previous Block Hash (32 bytes):</label>
       <input type="text" id="previousBlockHash" class="form-control" [(ngModel)]="previousBlockHash"
           (ngModelChange)="updateHash()">
   </div>
-
-
-  <!-- <div class="form-group col-md-6">
-      <label for="timestamp">Time (4 bytes):</label>
-      <input type="text" id="timestamp" class="form-control" [(ngModel)]="timestamp" disabled>
-  </div> -->
 
   <div class="form-row row">
       <div class="form-group col-md-6" style="padding-right: 0px;">
