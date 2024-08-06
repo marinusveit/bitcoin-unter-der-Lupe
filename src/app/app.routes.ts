@@ -6,6 +6,7 @@ import { BlockHeaderComponent } from './block-header/block-header.component';
 import { BlockComponent } from './block/block.component';
 import { MerkleTreeComponent } from './merkle-tree/merkle-tree.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { BlockChainComponent } from './block-chain/block-chain.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,4 +16,5 @@ export const routes: Routes = [
   { path: 'blockheader', component: BlockHeaderComponent },
   { path: 'transaction', component: TransactionComponent },
   { path: 'block', component: BlockComponent },
+  { path: 'blockchain', component: BlockChainComponent },
 ];
