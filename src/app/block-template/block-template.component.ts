@@ -15,8 +15,9 @@ export class BlockTemplateComponent {
   @Input() previousBlockHash: string = '';
   @Input() nBits: number = 0x1effffff;
   @Input() transactions: TransactionComponent[] = [];
-  @Output() mineEvent = new EventEmitter<string>();
+  @Output() hashChange = new EventEmitter<string>();
 
+// TODO: MerkleRootHash aus transactions berechnen
   hash: string = '';
   nonce: number = 0;
   merkleRootHash: string = '';
@@ -25,6 +26,7 @@ export class BlockTemplateComponent {
   showTransactions: boolean = false;
   target: string = '';
   maxDifficulty: number = 1.1042793496663079e+71
+
 
   constructor() {
     this.updateTarget();
@@ -47,6 +49,7 @@ export class BlockTemplateComponent {
 
   updateHash() {
     this.hash = this.calculateHash();
+    this.hashChange.emit(this.hash);
   }
 
   isHashValid(): boolean {
@@ -89,7 +92,7 @@ export class BlockTemplateComponent {
       this.hash = this.calculateHash();
     }
     // Emit Event, wenn der Block gemined wurde
-    this.mineEvent.emit(this.hash);
+    this.hashChange.emit(this.hash);
   }
 
 
