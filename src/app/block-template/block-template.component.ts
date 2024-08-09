@@ -15,6 +15,7 @@ export class BlockTemplateComponent {
   @Input() previousBlockHash: string = '';
   @Input() nBits: number = 0x1effffff;
   @Input() transactions: TransactionComponent[] = [];
+  @Output() mineEvent = new EventEmitter<string>();
 
   hash: string = '';
   nonce: number = 0;
@@ -87,6 +88,8 @@ export class BlockTemplateComponent {
       this.nonce++;
       this.hash = this.calculateHash();
     }
+    // Emit Event, wenn der Block gemined wurde
+    this.mineEvent.emit(this.hash);
   }
 
 
