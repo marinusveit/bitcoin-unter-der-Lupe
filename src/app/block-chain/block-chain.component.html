@@ -5,7 +5,7 @@
                 [previousBlockHash]="block.previousBlockHash"
                 [nBits]="block.nBits"
                 [transactions]="block.transactions"
-                (mineEvent)="onBlockMined(i, $event)"
+                (hashChange)="onHashChange(i, $event)"
             >
             </app-block-template>
             <!-- Button um einen neuen Block hinzuzufügen -->
