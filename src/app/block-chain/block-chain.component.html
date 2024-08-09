@@ -15,22 +15,3 @@
         </div>
     </div>
 </div>
-
-
-
-<!-- <div class="container-fluid">
-    <div class="row flex-nowrap overflow-auto py-5">
-        <div *ngFor="let block of blocks; let i = index" class="mb-4">
-            <app-block-template
-                [previousBlockHash]="block.previousBlockHash"
-                [nBits]="block.nBits"
-                [transactions]="block.transactions"
-                (mineEvent)="onBlockMined(i, $event)"
-            >
-            </app-block-template>
-            <button *ngIf="i === blocks.length - 1" [disabled]="!(block.mined && i === blocks.length - 1)" class="btn btn-success mt-3" (click)="addBlock(block.hash)">
-                + Neuer Block
-            </button>
-        </div>
-    </div>
-</div> -->
