@@ -15,7 +15,7 @@ export class BlockChainComponent {
   constructor() {
     // Initialer Block ohne vorherigen Hash (Genesis Block)
     this.blocks.push({
-      previousBlockHash: '',
+      previousBlockHash: '0000000000000000000000000000000000000000000000000000000000000000',
       nBits: 0x1effffff,
       transactions: [],
       mined: false,
