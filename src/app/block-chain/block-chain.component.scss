@@ -1,3 +1,23 @@
+.container-fluid {
+    padding-left: 0; /* Entfernt den linken Abstand */
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start; /* Stellt sicher, dass die Blöcke linksbündig ausgerichtet sind */
+    padding-left: 0; /* Entfernt den linken Abstand */
+}
+
+.row > div {
+    flex: 0 0 auto;
+    width: 700px; /* Stellt sicher, dass das umschließende Div die gleiche Breite hat wie das app-block-template */
+    overflow: hidden; /* Entfernt das Scrollen innerhalb des Divs */
+    margin-right: 20px; /* Fügt einen Abstand zwischen den Blöcken hinzu */
+}
+
 app-block-template {
     width: 700px;
 }
