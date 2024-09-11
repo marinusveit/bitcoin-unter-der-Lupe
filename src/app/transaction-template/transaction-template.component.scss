@@ -1,0 +1,18 @@
+.transaction .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+  }
+  .transaction .list-group-item {
+    font-size: 14px;
+  }
+
+  /* Farbänderung bei Mouseover */
+.tx-icon-style:hover {
+  color: #007bff; /* Neue Farbe beim Mouseover (Blau z.B.) */
+}
+
+.tx-icon-style {
+  margin-right: 10px;
+  font-size: 20px;
+  transition: color 0.3s ease; /* Übergangseffekt für die Farbänderung */
+}
