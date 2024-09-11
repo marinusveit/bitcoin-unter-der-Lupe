@@ -4,14 +4,14 @@ import { FormsModule } from '@angular/forms';
 import * as crypto from 'crypto-js';
 import { DataService } from '../data.service';
 import { HIGHLIGHT_OPTIONS, Highlight, HighlightAuto } from 'ngx-highlightjs';
-import { TransactionComponent } from '../transaction/transaction.component';
+import { TransactionTemplateComponent } from '../transaction-template/transaction-template.component';
 // import 'highlight.js/styles/androidstudio.min.css'; // anderes farb scheme für code
 import { exampleTransactions } from '../../assets/data/transactions';
 
 @Component({
   selector: 'app-block',
   standalone: true,
-  imports: [CommonModule, FormsModule, Highlight, HighlightAuto, TransactionComponent],
+  imports: [CommonModule, FormsModule, Highlight, HighlightAuto, TransactionTemplateComponent],
   templateUrl: './block.component.html',
   styleUrls: ['./block.component.scss'],
   providers: [DataService,

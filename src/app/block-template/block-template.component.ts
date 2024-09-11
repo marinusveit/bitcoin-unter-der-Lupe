@@ -1,20 +1,20 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import * as crypto from 'crypto-js';
 import { CommonModule } from '@angular/common';
-import { TransactionComponent } from '../transaction/transaction.component';  // Stelle sicher, dass du ein Transaction Model hast
+import { TransactionTemplateComponent } from '../transaction-template/transaction-template.component';  // Stelle sicher, dass du ein Transaction Model hast
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-block-template',
   standalone: true,
-  imports: [CommonModule, FormsModule, TransactionComponent],
+  imports: [CommonModule, FormsModule, TransactionTemplateComponent],
   templateUrl: './block-template.component.html',
   styleUrl: './block-template.component.scss'
 })
 export class BlockTemplateComponent {
   @Input() previousBlockHash: string = '';
   @Input() nBits: number = 0x1effffff;
-  @Input() transactions: TransactionComponent[] = [];
+  @Input() transactions: TransactionTemplateComponent[] = [];
   @Output() hashChange = new EventEmitter<string>();
 
 // TODO: MerkleRootHash aus transactions berechnen

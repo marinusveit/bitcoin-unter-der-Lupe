@@ -48,10 +48,10 @@
           (ngModelChange)="updateHash()">
     </div>
     <div *ngIf="showTransactions" class="mt-3" style="max-height: 300px; overflow-y: auto;">
-      <app-transaction *ngFor="let transaction of transactions"
+      <app-transaction-template *ngFor="let transaction of transactions"
                        [txId]="transaction.txId"
                        [inputs]="transaction.inputs"
                        [outputs]="transaction.outputs">
-      </app-transaction>
+      </app-transaction-template>
     </div>
   </div>
