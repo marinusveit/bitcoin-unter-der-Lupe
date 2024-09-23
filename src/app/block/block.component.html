@@ -3,14 +3,22 @@
     <p>Der im JSON Format gezeigte Block ist der <a href="https://www.house-of-satoshi.ch/der-3-januar-und-der-bitcoin-genesis-block/" target="_blank">Genesis Block</a> und wurde über die <a href="https://www.blockchain.com/de/explorer/api/blockchain_api" target="_blank">blockchain.com API</a> heruntergeladen.</p>
     <p>Man erkennt den Genesis Block an dem <code>"prev_block": "0000000000000000000000000000000000000000000000000000000000000000"</code>.</p>
     <pre>
-      <code [highlight]="block | json"
+      <code [highlight]="bitcoin_block | json"
       language="json"></code>
     </pre>
 </div>
 
+<div class="container mt-3">
+    <app-block-template class="container mt-4"
+        [previousBlockHash]="block.previousBlockHash"
+        [nBits]="block.nBits"
+        [transactions]="block.transactions">
+    </app-block-template>
+</div>
 
-<div class="container mt-4" [ngClass]="{'hash-invalid': !isHashValid(), 'hash-valid': isHashValid()}">
-    <h3 class="mb-4">Block
+
+<!-- <div class="container mt-4" [ngClass]="{'hash-invalid': !isHashValid(), 'hash-valid': isHashValid()}"> -->
+    <!-- <h3 class="mb-4">Block
         <button class="btn btn-primary mt-0 ms-2" (click)="mine()">Mine</button>
 
     </h3>
@@ -60,10 +68,12 @@
             (ngModelChange)="updateHash()">
     </div>
     <div *ngIf="showTransactions" class="mt-3" style="max-height: 300px; overflow-y: auto;">
-      <app-transaction-template *ngFor="let transaction of transactions"
-                       [txId]="transaction.txId"
-                       [inputs]="transaction.inputs"
-                       [outputs]="transaction.outputs">
+        <app-transaction-template
+        [transactions]="transactions"
+        (txChange)="updateTx($event)"
+        (merkleRootChange)="updateMerkleRoot($event)"
+        >
       </app-transaction-template>
     </div>
 </div>
+    -->

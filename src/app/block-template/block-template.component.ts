@@ -3,6 +3,7 @@ import * as crypto from 'crypto-js';
 import { CommonModule } from '@angular/common';
 import { TransactionTemplateComponent } from '../transaction-template/transaction-template.component';  // Stelle sicher, dass du ein Transaction Model hast
 import { FormsModule } from '@angular/forms';
+import { Transaction } from '../data_types/transaction';
 
 @Component({
   selector: 'app-block-template',
@@ -14,16 +15,15 @@ import { FormsModule } from '@angular/forms';
 export class BlockTemplateComponent {
   @Input() previousBlockHash: string = '';
   @Input() nBits: number = 0x1effffff;
-  @Input() transactions: TransactionTemplateComponent[] = [];
+  @Input() transactions: Transaction[] = [];
   @Output() hashChange = new EventEmitter<string>();
 
-// TODO: MerkleRootHash aus transactions berechnen
   hash: string = '';
   nonce: number = 0;
   merkleRootHash: string = '';
   nBitsWarning: string = '';
   showAdvancedInfo: boolean = false;
-  showTransactions: boolean = false;
+  showTransactions: boolean = true;
   target: string = '';
   maxDifficulty: number = 1.1042793496663079e+71
 
@@ -32,7 +32,6 @@ export class BlockTemplateComponent {
     this.updateTarget();
     this.hash = this.calculateHash();
   }
-
 
   ngOnChanges() {
     this.updateHash();
@@ -87,6 +86,11 @@ export class BlockTemplateComponent {
     this.nonce = 0;
     this.hash = this.calculateHash();
 
+    // falls noch keine tx vorhanden coinbase einfügen
+    if (this.transactions.length < 1){
+      this.transactions.push()
+    }
+    // todo: hier ein break einbauen, falls schleife länger als 2 min läuft?!
     while (!this.isHashValid()) {
       this.nonce++;
       this.hash = this.calculateHash();
@@ -95,5 +99,13 @@ export class BlockTemplateComponent {
     this.hashChange.emit(this.hash);
   }
 
+  updateTx(transactions: Transaction[]){
+    this.transactions = transactions
+  }
+
+  updateMerkleRoot(merkleRoot: string){
+    this.merkleRootHash = merkleRoot
+    this.updateHash();
+  }
 
 }

@@ -1,25 +1,26 @@
-<div class="transaction card mb-3">
-  <!-- <div *ngFor="let tx of transactions" class="mb-4"> -->
+<div *ngFor="let transaction of transactions; let index = index">
 
+
+  <div class="transaction card mb-3">
     <div class="card-header">
-      <h5 class="card-title">Transaction ID: {{ txId }}</h5>
+      <h5 class="card-title">Transaction ID: {{ transaction.txId }}</h5>
     </div>
     <div class="card-body">
       <div class="inputs">
         <h6>Inputs</h6>
         <ul class="list-group">
-          <li class="list-group-item" *ngFor="let input of inputs">
+          <li class="list-group-item" *ngFor="let input of transaction.inputs">
             <div style="display: flex; align-items: center;">
               <i class="bi bi-geo-alt-fill tx-icon-style"
-                 title="Definiert wo die Transaktion zu finden ist. Previous Tx Hash: Identifiziert die vorherige Transaktion. Index: der wievielte Output der Transaktion ausgegeben werden soll."></i>
+              title="Definiert wo die Transaktion zu finden ist. Previous Tx Hash: Identifiziert die vorherige Transaktion. Index: der wievielte Output der Transaktion ausgegeben werden soll."></i>
               <div>
                 <strong>Previous Tx Hash: </strong> {{ input.previousTxHash }}<br>
-                <strong>Index: </strong> {{ input.outputIndex }}
+                <strong>Index: </strong> {{ input.index }}
               </div>
             </div>
             <div style="display: flex; align-items: center;">
               <i class="bi bi-key-fill tx-icon-style"
-                 title="ScriptSig enthält die Informationen, um die Schritte im ScriptPubKey der vorherigen Transaktion zu erfüllen und den Input auszugeben."></i>
+              title="ScriptSig enthält die Informationen, um die Schritte im ScriptPubKey der vorherigen Transaktion zu erfüllen und den Input auszugeben."></i>
               <div>
                 <strong>ScriptSig: </strong> {{ input.scriptSig }}
               </div>
@@ -30,17 +31,19 @@
       <div class="outputs mt-3">
         <h6>Outputs</h6>
         <ul class="list-group">
-          <li class="list-group-item" *ngFor="let output of outputs">
+          <li class="list-group-item" *ngFor="let output of transaction.outputs">
             <div style="display: flex; align-items: center;">
               <i class="bi bi-currency-bitcoin bitcoin-color tx-icon-style"
-                 title="Gibt den Wert des Outputs in Satoshis an."></i>
+              title="Gibt den Wert des Outputs in Satoshis an."></i>
               <div>
-                <strong>Value: </strong> {{ output.value }} Satoshis
+                <strong>Value: </strong>
+                <!-- Input-Feld für den Value, das der Benutzer ändern kann -->
+                <input type="number" [(ngModel)]="output.value" (ngModelChange)="onValueChange(transaction)" class="form-control value-input">
               </div>
             </div>
             <div style="display: flex; align-items: center;">
               <i class="bi bi-lock-fill tx-icon-style"
-                 title="ScriptPubKey definiert die Bedingungen, unter denen die Bitcoins ausgegeben werden können."></i>
+              title="ScriptPubKey definiert die Bedingungen, unter denen die Bitcoins ausgegeben werden können."></i>
               <div>
                 <strong>ScriptPubKey: </strong> {{ output.scriptPubKey }}
               </div>
@@ -49,9 +52,9 @@
         </ul>
       </div>
     </div>
-  <!-- </div> -->
-</div>
+  </div>
 
+</div>
 
 
 <!-- <div class="transaction card mb-3">

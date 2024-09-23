@@ -56,9 +56,23 @@
 
   <div class="container mt-4">
     <h3>Bitcoin Transaktionen anschaulich dargestellt</h3>
-    <app-transaction-template *ngFor="let transaction of transactions"
-        [txId]="transaction.txId"
-        [inputs]="transaction.inputs"
-        [outputs]="transaction.outputs">
-    </app-transaction-template>
+    Merkle Root: {{ this.merkleRoot }}
+    <app-transaction-template
+    [transactions]="transactions"
+    (txChange)="updateTx($event)"
+    (merkleRootChange)="updateMerkleRoot($event)"
+    >
+  </app-transaction-template>
 </div>
+
+<!--
+  <div class="container mt-4">
+    <h3>Bitcoin Transaktionen anschaulich dargestellt</h3>
+    <app-transaction-template *ngFor="let transaction of transactions; let index = index"
+    [inputs]="transaction.inputs"
+    [outputs]="transaction.outputs"
+    (txIdChange)="updateTxId(index, $event)"
+    >
+  </app-transaction-template>
+</div>  -->
+
