@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import * as crypto from 'crypto-js';
 import { CommonModule } from '@angular/common';
 import { TransactionTemplateComponent } from '../transaction-template/transaction-template.component';  // Stelle sicher, dass du ein Transaction Model hast
@@ -28,7 +28,7 @@ export class BlockTemplateComponent {
   maxDifficulty: number = 1.1042793496663079e+71
 
 
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
     this.updateTarget();
     this.hash = this.calculateHash();
   }
@@ -106,6 +106,7 @@ export class BlockTemplateComponent {
   updateMerkleRoot(merkleRoot: string){
     this.merkleRootHash = merkleRoot
     this.updateHash();
+    this.cdr.detectChanges()
   }
 
 }
