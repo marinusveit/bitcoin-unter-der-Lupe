@@ -58,11 +58,10 @@
     <h3>Bitcoin Transaktionen anschaulich dargestellt</h3>
     Merkle Root: {{ this.merkleRoot }}
     <app-transaction-template
-    [transactions]="transactions"
-    (txChange)="updateTx($event)"
-    (merkleRootChange)="updateMerkleRoot($event)"
-    >
-  </app-transaction-template>
+      [transactions]="transactions"
+      (txChange)="updateTx($event)"
+      (merkleRootChange)="updateMerkleRoot($event)">
+    </app-transaction-template>
 </div>
 
 <!--
