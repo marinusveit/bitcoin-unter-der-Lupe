@@ -1,24 +1,29 @@
 .transaction .card-header {
     background-color: #f8f9fa;
     border-bottom: 1px solid #e9ecef;
-  }
-  .transaction .list-group-item {
-    font-size: 14px;
-  }
+}
 
-  /* Farbänderung bei Mouseover */
+.transaction .list-group-item {
+    font-size: 14px;
+}
+
+/* Farbänderung bei Mouseover */
 .tx-icon-style:hover {
-  color: #007bff; /* Neue Farbe beim Mouseover (Blau z.B.) */
+    color: #007bff; /* Neue Farbe beim Mouseover (Blau z.B.) */
 }
 
 .tx-icon-style {
-  margin-right: 10px;
-  font-size: 20px;
-  transition: color 0.3s ease; /* Übergangseffekt für die Farbänderung */
+    margin-right: 10px;
+    font-size: 20px;
+    transition: color 0.3s ease; /* Übergangseffekt für die Farbänderung */
 }
 
 .value-input {
-  width: 80%;
-  display: inline-block;
-  margin-left: 5px;
+    width: 80%;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.list-group-item > div > div {
+  max-width: 98%; /* Setzt die maximale Breite aller direkten Kinder auf 100% => umbruch des texts innerhalb des li elements */
 }

@@ -1,6 +1,4 @@
 <div *ngFor="let transaction of transactions; let index = index">
-
-
   <div class="transaction card mb-3">
     <div class="card-header">
       <h5 class="card-title">Transaction ID: {{ transaction.txId }}</h5>
@@ -12,17 +10,38 @@
           <li class="list-group-item" *ngFor="let input of transaction.inputs">
             <div style="display: flex; align-items: center;">
               <i class="bi bi-geo-alt-fill tx-icon-style"
-              title="Definiert wo die Transaktion zu finden ist. Previous Tx Hash: Identifiziert die vorherige Transaktion. Index: der wievielte Output der Transaktion ausgegeben werden soll."></i>
+                title="Definiert wo die Transaktion zu finden ist. Previous Tx Hash: Identifiziert die vorherige Transaktion. Index: der wievielte Output der Transaktion ausgegeben werden soll."></i>
               <div>
                 <strong>Previous Tx Hash: </strong> {{ input.previousTxHash }}<br>
                 <strong>Index: </strong> {{ input.index }}
               </div>
             </div>
-            <div style="display: flex; align-items: center;">
+            <!-- Umschaltbare Darstellung zwischen Hex und ASM -->
+            <div class="mt-4" style="display: flex; align-items: center;">
               <i class="bi bi-key-fill tx-icon-style"
-              title="ScriptSig enthält die Informationen, um die Schritte im ScriptPubKey der vorherigen Transaktion zu erfüllen und den Input auszugeben."></i>
+                title="ScriptSig enthält die Informationen, um die Schritte im ScriptPubKey der vorherigen Transaktion zu erfüllen und den Input auszugeben."></i>
               <div>
-                <strong>ScriptSig: </strong> {{ input.scriptSig }}
+                <div class="btn-group btn-group-sm mb-1" role="group" aria-label="Basic example">
+                  <!-- Bootstrap Buttons für Hex und ASM -->
+                  <button type="button" class="btn btn-outline-secondary"
+                    [class.active]="!isAsmView[input.previousTxHash]" (click)="setScriptSigView(input, false)"
+                    title="hexadezimale Darstellung des ScriptSig">
+                    Hex
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary"
+                    [class.active]="isAsmView[input.previousTxHash]"
+                    title="menschenlesbare Darstellung des Bitcoin-Scripts" (click)="setScriptSigView(input, true)">
+                    ASM
+                  </button>
+                </div>
+                <!-- Anzeige der ScriptSig in der entsprechenden Darstellung -->
+                <div>
+                  <strong>ScriptSig: </strong>
+                  <span *ngIf="isAsmView[input.previousTxHash]">
+                    <div [innerHTML]="hexToAsmScriptSig(input.scriptSig)"></div>
+                  </span>
+                  <span *ngIf="!isAsmView[input.previousTxHash]">{{ input.scriptSig }}</span>
+                </div>
               </div>
             </div>
           </li>
@@ -34,18 +53,40 @@
           <li class="list-group-item" *ngFor="let output of transaction.outputs">
             <div style="display: flex; align-items: center;">
               <i class="bi bi-currency-bitcoin bitcoin-color tx-icon-style"
-              title="Gibt den Wert des Outputs in Satoshis an."></i>
+                title="Gibt den Wert des Outputs in Satoshis an."></i>
               <div>
                 <strong>Value: </strong>
                 <!-- Input-Feld für den Value, das der Benutzer ändern kann -->
-                <input type="number" [(ngModel)]="output.value" (ngModelChange)="onValueChange(transaction)" class="form-control value-input">
+                <input type="number" [(ngModel)]="output.value" (ngModelChange)="onValueChange(transaction)"
+                  class="form-control value-input">
               </div>
             </div>
-            <div style="display: flex; align-items: center;">
+            <!-- Umschaltbare Darstellung zwischen Hex und ASM für ScriptPubKey -->
+            <div class="mt-4" style="display: flex; align-items: center;">
               <i class="bi bi-lock-fill tx-icon-style"
-              title="ScriptPubKey definiert die Bedingungen, unter denen die Bitcoins ausgegeben werden können."></i>
+                title="ScriptPubKey definiert die Bedingungen, unter denen die Bitcoins ausgegeben werden können."></i>
               <div>
-                <strong>ScriptPubKey: </strong> {{ output.scriptPubKey }}
+                <div class="btn-group btn-group-sm mb-1" role="group" aria-label="Basic example">
+                  <!-- Bootstrap Buttons für Hex und ASM -->
+                  <button type="button" class="btn btn-outline-secondary"
+                    [class.active]="!isAsmView[output.scriptPubKey]" (click)="setScriptPubKeyView(output, false)">
+                    Hex
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary"
+                    [class.active]="isAsmView[output.scriptPubKey]" (click)="setScriptPubKeyView(output, true)">
+                    ASM
+                  </button>
+                </div>
+
+                <!-- Anzeige des ScriptPubKey in der entsprechenden Darstellung -->
+                <div>
+                  <strong>ScriptPubKey: </strong>
+                  <span *ngIf="isAsmView[output.scriptPubKey]">
+                    <div [innerHTML]="hexToAsm(output.scriptPubKey)"></div>
+                  </span>
+                    <!-- {{ hexToAsm(output.scriptPubKey) }}</span> -->
+                  <span *ngIf="!isAsmView[output.scriptPubKey]">{{ output.scriptPubKey }}</span>
+                </div>
               </div>
             </div>
           </li>
@@ -53,5 +94,4 @@
       </div>
     </div>
   </div>
-
 </div>
