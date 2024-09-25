@@ -1,67 +1,130 @@
 <div class="container mt-5">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Bitcoin Transaktionen: Ein Überblick</h4>
-      </div>
-      <div class="card-body">
-        <p class="lead">Eine Bitcoin-Transaktion unterscheidet sich stark von den traditionellen Banktransaktionen. Sie basiert nicht auf einem zentralen Kontostand, sondern auf dem sogenannten <strong>UTxO-Modell (Unspent Transaction Output)</strong>.</p>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Bitcoin Transaktionen: Ein Überblick</h4>
+    </div>
+    <div class="card-body">
+      <p class="lead">Eine Bitcoin-Transaktion unterscheidet sich stark von den traditionellen Banktransaktionen. Sie
+        basiert nicht auf einem zentralen Kontostand, sondern auf dem sogenannten <strong>UTxO-Modell (Unspent
+          Transaction Output)</strong>.</p>
 
-        <h5>1. UTxO und ScriptSig</h5>
-        <p>
-          Anders als bei Banken, bei denen ein Kontostand existiert, besitzt man in Bitcoin <strong>UTxOs</strong>, die man ausgeben kann. Ein UTxO ist eine „unverbrauchte“ Ausgabe einer früheren Transaktion. Um einen UTxO auszugeben, muss man die im <strong>ScriptPubKey</strong> festgelegten Bedingungen erfüllen. Diese Bedingungen sind oft der Nachweis eines privaten Schlüssels, welcher in der <strong>ScriptSig</strong> enthalten ist.
-        </p>
+      <h5>1. UTxO und ScriptSig</h5>
+      <p>
+        Anders als bei Banken, bei denen ein Kontostand existiert, besitzt man in Bitcoin <strong>UTxOs</strong>, die
+        man ausgeben kann. Ein UTxO ist eine „unverbrauchte“ Ausgabe einer früheren Transaktion. Um einen UTxO
+        auszugeben, muss man die im <strong>ScriptPubKey</strong> festgelegten Bedingungen erfüllen. Diese Bedingungen
+        sind oft der Nachweis eines privaten Schlüssels, welcher in der <strong>ScriptSig</strong> enthalten ist.
+      </p>
 
-        <h5>2. TxHash und Output-Index</h5>
-        <p>
-          Jede Transaktion wird durch einen eindeutigen <strong>TxHash</strong> identifiziert. Dieser Hash ermöglicht es, eine bestimmte Transaktion zu referenzieren. Jede Transaktion kann mehrere Outputs haben, und der <strong>Index</strong> gibt an, welcher dieser Outputs gemeint ist.
-        </p>
+      <h5>2. TxHash und Output-Index</h5>
+      <p>
+        Jede Transaktion wird durch einen eindeutigen <strong>TxHash</strong> identifiziert. Dieser Hash ermöglicht es,
+        eine bestimmte Transaktion zu referenzieren. Jede Transaktion kann mehrere Outputs haben, und der
+        <strong>Index</strong> gibt an, welcher dieser Outputs gemeint ist.
+      </p>
 
-        <h5>3. ScriptPubKey</h5>
-        <p>
-          Der <strong>ScriptPubKey</strong> definiert die Bedingungen, unter denen der Output ausgegeben werden kann. Typischerweise enthält er die Adresse des Empfängers und kryptografische Bedingungen, die erfüllt werden müssen.
-        </p>
+      <h5>3. ScriptPubKey</h5>
+      <p>
+        Der <strong>ScriptPubKey</strong> definiert die Bedingungen, unter denen der Output ausgegeben werden kann.
+        Typischerweise enthält er die Adresse des Empfängers und kryptografische Bedingungen, die erfüllt werden müssen.
+      </p>
 
-        <h5>2. Eingabe und Ausgabe in Transaktionen</h5>
-        <p>
-          Eine Bitcoin-Transaktion besteht aus <strong>Inputs</strong> und <strong>Outputs</strong>. Inputs verweisen auf UTxOs aus früheren Transaktionen, und Outputs erzeugen neue UTxOs. Die Regel lautet, dass die Summe der Inputs immer gleich oder größer als die Summe der Outputs sein muss: <strong>Inputs ≥ Outputs</strong>. Differenzen werden als <strong>Transaktionsgebühren (Fees)</strong> an die Miner abgeführt.
-        </p>
+      <h5>2. Eingabe und Ausgabe in Transaktionen</h5>
+      <p>
+        Eine Bitcoin-Transaktion besteht aus <strong>Inputs</strong> und <strong>Outputs</strong>. Inputs verweisen auf
+        UTxOs aus früheren Transaktionen, und Outputs erzeugen neue UTxOs. Die Regel lautet, dass die Summe der Inputs
+        immer gleich oder größer als die Summe der Outputs sein muss: <strong>Inputs ≥ Outputs</strong>. Differenzen
+        werden als <strong>Transaktionsgebühren (Fees)</strong> an die Miner abgeführt.
+      </p>
 
-        <h5>5. Wechselgeld in Transaktionen</h5>
-        <p>
-          Wenn der UTxO, den man besitzt, größer ist als der gewünschte Betrag, wird die Differenz als <strong>Wechselgeld</strong> an den Absender zurückgeschickt. Beispiel: Wenn man 2 BTC besitzt und nur 1 BTC senden möchte, wird der Rest (abzüglich der Gebühren) als Wechselgeld an die eigene Adresse zurückgeschickt.
-        </p>
+      <h5>5. Wechselgeld in Transaktionen</h5>
+      <p>
+        Wenn der UTxO, den man besitzt, größer ist als der gewünschte Betrag, wird die Differenz als
+        <strong>Wechselgeld</strong> an den Absender zurückgeschickt. Beispiel: Wenn man 2 BTC besitzt und nur 1 BTC
+        senden möchte, wird der Rest (abzüglich der Gebühren) als Wechselgeld an die eigene Adresse zurückgeschickt.
+      </p>
 
-        <h5>6. Miner-Gebühren (Fees)</h5>
-        <p>
-          <strong>Miner-Gebühren</strong> werden als Anreiz für Miner gezahlt, um Transaktionen in einen Block aufzunehmen. Diese Gebühren entstehen, wenn die Summe der Inputs größer ist als die Summe der Outputs. Die Differenz geht als Fee an den Miner, der den Block bestätigt.
-        </p>
+      <h5>6. Miner-Gebühren (Fees)</h5>
+      <p>
+        <strong>Miner-Gebühren</strong> werden als Anreiz für Miner gezahlt, um Transaktionen in einen Block
+        aufzunehmen. Diese Gebühren entstehen, wenn die Summe der Inputs größer ist als die Summe der Outputs. Die
+        Differenz geht als Fee an den Miner, der den Block bestätigt.
+      </p>
 
-        <h5>7. Mehrere Inputs kombinieren</h5>
-        <p>
-          Wenn man keine einzelnen UTxOs besitzt, die groß genug sind, um den gewünschten Betrag zu decken, können mehrere <strong>Inputs</strong> kombiniert werden. Das Bitcoin-Netzwerk erlaubt es, mehrere UTxOs aus verschiedenen früheren Transaktionen zu bündeln, um größere Zahlungen zu leisten.
-        </p>
+      <h5>7. Mehrere Inputs kombinieren</h5>
+      <p>
+        Wenn man keine einzelnen UTxOs besitzt, die groß genug sind, um den gewünschten Betrag zu decken, können mehrere
+        <strong>Inputs</strong> kombiniert werden. Das Bitcoin-Netzwerk erlaubt es, mehrere UTxOs aus verschiedenen
+        früheren Transaktionen zu bündeln, um größere Zahlungen zu leisten.
+      </p>
 
-        <h5>8. Wie Bitcoins in Umlauf kommen</h5>
-        <p>
-          Neue Bitcoins werden durch das <strong>Minen von Blöcken</strong> in Umlauf gebracht. Miner erhalten eine Belohnung, wenn sie einen Block erfolgreich minen, was die einzige Möglichkeit ist, neue Bitcoins zu schaffen. Diese Belohnung halbiert sich alle vier Jahre, bis das maximale Angebot von 21 Millionen Bitcoins erreicht ist.
-        </p>
+      <h5>8. Wie Bitcoins in Umlauf kommen</h5>
+      <p>
+        Neue Bitcoins werden durch das <strong>Minen von Blöcken</strong> in Umlauf gebracht. Miner erhalten eine
+        Belohnung, wenn sie einen Block erfolgreich minen, was die einzige Möglichkeit ist, neue Bitcoins zu schaffen.
+        Diese Belohnung halbiert sich alle vier Jahre, bis das maximale Angebot von 21 Millionen Bitcoins erreicht ist.
+      </p>
 
-        <div class="alert alert-info mt-2">
-          <strong>Zusammenfassung:</strong> Im Bitcoin-System gibt es keinen zentralen Kontostand. Man besitzt ungenutzte Transaktionsausgaben (UTxOs), die man nur ausgeben kann, wenn man die entsprechenden kryptografischen Bedingungen erfüllt. Transaktionen bestehen aus Inputs, die frühere UTxOs nutzen, und Outputs, die neue UTxOs generieren. Überschüsse gehen als Gebühren an Miner, und wenn keine einzelnen UTxOs groß genug sind, können mehrere Inputs kombiniert werden.
-        </div>
+      <div class="alert alert-info mt-2">
+        <strong>Zusammenfassung:</strong> Im Bitcoin-System gibt es keinen zentralen Kontostand. Man besitzt ungenutzte
+        Transaktionsausgaben (UTxOs), die man nur ausgeben kann, wenn man die entsprechenden kryptografischen
+        Bedingungen erfüllt. Transaktionen bestehen aus Inputs, die frühere UTxOs nutzen, und Outputs, die neue UTxOs
+        generieren. Überschüsse gehen als Gebühren an Miner, und wenn keine einzelnen UTxOs groß genug sind, können
+        mehrere Inputs kombiniert werden.
       </div>
     </div>
   </div>
+</div>
+<!-- https://learnmeabitcoin.com/explorer/tx/10d9532cbdbf7e3bf4c2190a836bc386dc55c5f93d7a895c95988d93c8bd5e65 -->
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Raw Bitcoin Transaktion</h4>
+    </div>
+    <div class="card-body rawTx">
+      <div title="Version">02000000</div>
+      <div title="Input Count">01</div>
+      <div title="Transaktions ID">4f6c7011ba67ba79271fc1e1f6d3a942e1abf00915925af6427396cbaefeb7a7</div>
+      <div title="VOUT">01000000</div>
+      <div title="ScriptSig Size">6a</div>
+      <div title="ScriptSig">
+        47304402207ecf13566055069dd6ffd85b8cd90fb243ea5301d8fcdc86b72bf6d5b9b8ca7a02205eb8ca16c15c60f43ae24500a57b5beb4060ba9f134d170cb9184421f5c933d30121033f23674e8f1ac82546a5d02c6586bcaef461bba6789edd6dcece9e9701a37c5b
+      </div>
+      <div title="Sequence">feffffff</div>
+      <div title="Output Count">02</div>
+      <div title="Amount">f86ecc0300000000</div>
+      <div title="ScriptPubKey Size">19</div>
+      <div title="ScriptPubKey">76a914345ebee6c266c5ce5faaab0520ad411dd7086e5f88ac</div>
+      <div title="Amount">80a8120100000000</div>
+      <div title="ScriptPubKey Size">19</div>
+      <div title="ScriptPubKey">76a914a7f4c1e285bf2e177e2c61c4700b0fe12a5b001d88ac</div>
+      <div title="Locktime">c0140700</div>
+    </div>
+  </div>
 
+  <div>
+    - Todo: prüfen warum txids unterschiedlich sind. erklären wie man von raw auf json kommt.
+  </div>
+  <div>
+    - für anschauliche darstellung nur die zentralen felder einer transaktion -> diese kurz erklären. Noch ein paar
+    grafiken einfügen wie utxo modell funktioniert.
+  </div>
+  <div>
+    - Coinbase auch erklären
+  </div>
 
-  <div class="container mt-4">
-    <h3>Bitcoin Transaktionen anschaulich dargestellt</h3>
-    Merkle Root: {{ this.merkleRoot }}
-    <app-transaction-template
-      [transactions]="transactions"
-      (txChange)="updateTx($event)"
-      (merkleRootChange)="updateMerkleRoot($event)">
-    </app-transaction-template>
+  <pre>
+      <code [highlight]="txToDisplay | json"
+      language="json"></code>
+    </pre>
+</div>
+
+<div class="container mt-4">
+  <h3>Bitcoin Transaktionen anschaulich dargestellt</h3>
+  Merkle Root: {{ this.merkleRoot }}
+  <app-transaction-template [transactions]="transactions" (txChange)="updateTx($event)"
+    (merkleRootChange)="updateMerkleRoot($event)">
+  </app-transaction-template>
 </div>
 
 <!--
@@ -74,4 +137,3 @@
     >
   </app-transaction-template>
 </div>  -->
-
