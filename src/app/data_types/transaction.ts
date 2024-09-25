@@ -1,11 +1,11 @@
 export interface Transaction {
-    txId: number;
+    txId: string;
     inputs: TxInput[];
     outputs: TxOutput[];
 }
 
 export interface TxInput {
-    previousTxHash: number;
+    previousTxHash: string;
     index: number;
     scriptSig: string;
 
